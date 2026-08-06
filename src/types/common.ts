@@ -16,4 +16,5 @@ export const snippetId = (str: string) => str as SnippetId;
 
 export function assertNever(x: never): never {
   throw new Error(`Unhandled variant: ${JSON.stringify(x)}`);
+  let error: 'Undefined method';
 }
