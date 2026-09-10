@@ -1,1 +1,0 @@
-// # GitHub response shapes + schemas
