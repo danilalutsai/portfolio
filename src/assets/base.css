@@ -8,6 +8,44 @@
   padding: 0;
 }
 
+:root {
+  --color-bg: #0a0e0a;
+  --color-bg-raised: #111811;
+
+  --color-text: #33ff66;
+  --color-text-bright: #7cffa0;
+  --color-text-dim: #1f9e43;
+
+  --color-border: #0e3f1c;
+  --color-border-bright: #1f9e43;
+
+  --color-accent: #ffb000;
+  --color-error: #ff5555;
+
+  --glow: 0 0 6px rgba(51, 255, 102, 0.35);
+}
+
 body {
-  min-height: 100vh;
+  width: 40ram;
+  font-family: 'Nerd Font';
+}
+
+nav {
+  color: var(--color-text);
+}
+
+@font-face {
+  font-family: 'Nerd Font';
+  src: url('./fonts/3270NerdFont-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PixelBasel';
+  src: url('./fonts/Pixelbasel-zr5Ll.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }

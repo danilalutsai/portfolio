@@ -1,4 +1,4 @@
-{
+  {
   "name": "01-portfolio",
   "version": "0.0.0",
   "private": true,
@@ -22,6 +22,7 @@
   },
   "devDependencies": {
     "@ianvs/prettier-plugin-sort-imports": "^4.7.1",
+    "@tailwindcss/vite": "^4.3.3",
     "@tsconfig/node24": "^24.0.4",
     "@types/node": "^24.13.3",
     "@vitejs/plugin-vue": "^6.0.8",
@@ -35,6 +36,7 @@
     "npm-run-all2": "^9.0.2",
     "oxlint": "~1.74.0",
     "prettier": "3.9.5",
+    "tailwindcss": "^4.3.3",
     "typescript": "~6.0.0",
     "vite": "^8.1.5",
     "vite-plugin-vue-devtools": "^8.1.5",
