@@ -58,11 +58,12 @@
 }
 
 .hero {
+  background: url('./../assets/img/bg-waves-deep.svg') center / cover no-repeat;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 3rem;
   align-items: start;
-  font-family: "Open Sans";
+  font-family: "Poppins";
 }
 
 .webName {
@@ -71,7 +72,6 @@
   padding: 0rem;
   padding-bottom: 1.5rem;
   font-size: 36px;
-  font-family: 'Open Sans';
 }
 
 .main-info p {

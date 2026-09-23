@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue';
 import { RouterLink, RouterView, useRoute } from 'vue-router';
-import logo from '@/assets/img/dl-logo-bold-mirrored.svg';
+import logo from '@/assets/img/dl-logo-bolder.svg';
 
 interface NavItem {
   readonly label: string;
@@ -27,8 +27,8 @@ watch(() => route.fullPath, () => {
 
 <template>
   <div class="h-2 bg-linear-to-r from-[#75ff9f] to-[#69a8fa]"></div>
-  <div class="p-5 border-b border-gray-200">
-      <header class="mx-auto flex max-w-5xl items-center justify-between">
+  <div class="p-5 border-b border-gray-200 ">
+    <header class="mx-auto flex max-w-5xl items-center justify-between">
 
       <!-- Brand -->
       <RouterLink
@@ -45,7 +45,7 @@ watch(() => route.fullPath, () => {
           <li v-for="link in links" :key="link.to">
             <RouterLink
               :to="link.to"
-              class="group relative no-underline text-black hover:opacity-70"
+              class="group relative no-underline text-black opacity-70 hover:opacity-100"
             >{{ link.label }}</RouterLink>
           </li>
         </ul>
@@ -81,17 +81,17 @@ watch(() => route.fullPath, () => {
       leave-to-class="max-h-0 opacity-0"
     >
       <nav
-          v-show="isOpen"
-          id="mobile-nav"
-          class="overflow-hidden md:hidden"
-          aria-label="Mobile"
-        >
+        v-show="isOpen"
+        id="mobile-nav"
+        class="overflow-hidden md:hidden"
+        aria-label="Mobile"
+      >
         <ul class="flex flex-col py-2">
           <li v-for="link in links" :key="link.to">
             <RouterLink
-                :to="link.to"
-                class="block border-b border-black/10 py-1 text-black no-underline opacity-70 transition-opacity last:border-0 hover:opacity-100"
-              >{{ link.label }}</RouterLink>
+              :to="link.to"
+              class="block border-b border-black/10 py-1 text-black no-underline opacity-70 transition-opacity last:border-0 hover:opacity-100"
+            >{{ link.label }}</RouterLink>
           </li>
         </ul>
       </nav>

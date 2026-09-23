@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#75ff9f"/>
+      <stop offset="1" stop-color="#69a8fa"/>
+    </linearGradient>
+  </defs>
+
+  <!-- event loop ring -->
+  <path d="M363 164 A150 150 0 1 1 261 155" fill="url(#g)" fill-opacity="0.07"
+        stroke="url(#g)" stroke-width="7" stroke-linecap="round"/>
+  <!-- arrowhead -->
+  <path d="M278 150 L256 168 L250 146 Z" fill="url(#g)"/>
+
+  <!-- tick marks around the loop -->
+  <g stroke="url(#g)" stroke-width="5" stroke-linecap="round" stroke-opacity="0.45">
+    <path d="M450 300 H470"/>
+    <path d="M300 450 V470"/>
+    <path d="M150 300 H130"/>
+    <path d="M406 406 L420 420"/>
+    <path d="M194 406 L180 420"/>
+    <path d="M194 194 L180 180"/>
+  </g>
+  <g fill="url(#g)" fill-opacity="0.8">
+    <circle cx="450" cy="300" r="7"/>
+    <circle cx="300" cy="450" r="7"/>
+    <circle cx="150" cy="300" r="7"/>
+  </g>
+
+  <!-- arrow function glyph -->
+  <g stroke="url(#g)" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path d="M226 284 H296"/>
+    <path d="M226 316 H296"/>
+    <path d="M322 258 L376 300 L322 342"/>
+  </g>
+
+  <!-- callback queue -->
+  <g fill="url(#g)" stroke="url(#g)" stroke-width="3">
+    <rect x="196" y="500" width="62" height="30" rx="10" fill-opacity="0.35"/>
+    <rect x="270" y="500" width="62" height="30" rx="10" fill-opacity="0.2"/>
+    <rect x="344" y="500" width="62" height="30" rx="10" fill-opacity="0.1"/>
+  </g>
+  <path d="M300 468 V490" stroke="url(#g)" stroke-width="4" stroke-linecap="round" stroke-opacity="0.5"/>
+</svg>

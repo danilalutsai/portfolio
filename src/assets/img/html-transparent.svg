@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#75ff9f"/>
+      <stop offset="1" stop-color="#69a8fa"/>
+    </linearGradient>
+  </defs>
+
+  <!-- opening / closing angle brackets -->
+  <g fill="none" stroke="url(#g)" stroke-width="14" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M118 236 L62 300 L118 364"/>
+    <path d="M482 236 L538 300 L482 364"/>
+  </g>
+
+  <!-- document frame -->
+  <rect x="160" y="110" width="280" height="380" rx="24" fill="url(#g)" fill-opacity="0.1" stroke="url(#g)" stroke-width="5"/>
+
+  <!-- title bar -->
+  <path d="M160 160 H440" stroke="url(#g)" stroke-width="3" stroke-opacity="0.5"/>
+  <g fill="url(#g)" fill-opacity="0.7">
+    <circle cx="188" cy="135" r="6"/><circle cx="210" cy="135" r="6"/><circle cx="232" cy="135" r="6"/>
+  </g>
+
+  <!-- nesting tree: root -->
+  <g fill="none" stroke="url(#g)" stroke-width="3" stroke-linecap="round">
+    <path d="M206 196 V440"/>
+    <path d="M206 250 H240"/>
+    <path d="M206 306 H240"/>
+    <path d="M206 362 H240"/>
+    <path d="M206 418 H240"/>
+    <path d="M262 264 V334"/>
+    <path d="M262 334 H296"/>
+  </g>
+
+  <!-- root node -->
+  <rect x="186" y="180" width="120" height="32" rx="9" fill="url(#g)" fill-opacity="0.22" stroke="url(#g)" stroke-width="3"/>
+
+  <!-- child nodes -->
+  <g fill="url(#g)" fill-opacity="0.16" stroke="url(#g)" stroke-width="3">
+    <rect x="240" y="234" width="112" height="32" rx="9"/>
+    <rect x="240" y="290" width="88" height="32" rx="9"/>
+    <rect x="296" y="318" width="96" height="32" rx="9"/>
+    <rect x="240" y="346" width="120" height="32" rx="9"/>
+    <rect x="240" y="402" width="76" height="32" rx="9"/>
+  </g>
+
+  <!-- content lines inside nodes -->
+  <g stroke="url(#g)" stroke-width="4" stroke-linecap="round" stroke-opacity="0.85">
+    <path d="M202 196 H272"/>
+    <path d="M256 250 H324"/>
+    <path d="M256 306 H302"/>
+    <path d="M312 334 H368"/>
+    <path d="M256 362 H334"/>
+    <path d="M256 418 H292"/>
+  </g>
+
+  <!-- slash of a closing tag, bottom right of document -->
+  <path d="M404 452 L378 466" stroke="url(#g)" stroke-width="5" stroke-linecap="round" stroke-opacity="0.6"/>
+</svg>

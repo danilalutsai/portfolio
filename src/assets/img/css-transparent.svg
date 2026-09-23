@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#75ff9f"/>
+      <stop offset="1" stop-color="#69a8fa"/>
+    </linearGradient>
+  </defs>
+
+  <!-- curly braces -->
+  <g fill="none" stroke="url(#g)" stroke-width="13" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M122 132 C 92 132, 92 152, 92 186 C 92 252, 62 272, 62 300 C 62 328, 92 348, 92 414 C 92 448, 92 468, 122 468"/>
+    <path d="M478 132 C 508 132, 508 152, 508 186 C 508 252, 538 272, 538 300 C 538 328, 508 348, 508 414 C 508 448, 508 468, 478 468"/>
+  </g>
+
+  <!-- box model: margin -->
+  <rect x="158" y="118" width="284" height="264" rx="22" fill="url(#g)" fill-opacity="0.06"
+        stroke="url(#g)" stroke-width="3" stroke-dasharray="10 9" stroke-opacity="0.65"/>
+  <!-- border -->
+  <rect x="188" y="148" width="224" height="204" rx="18" fill="url(#g)" fill-opacity="0.08" stroke="url(#g)" stroke-width="5"/>
+  <!-- padding -->
+  <rect x="214" y="174" width="172" height="152" rx="14" fill="url(#g)" fill-opacity="0.1"
+        stroke="url(#g)" stroke-width="2.5" stroke-dasharray="6 7" stroke-opacity="0.7"/>
+  <!-- content -->
+  <rect x="240" y="200" width="120" height="100" rx="10" fill="url(#g)" fill-opacity="0.3" stroke="url(#g)" stroke-width="3"/>
+
+  <!-- content lines -->
+  <g stroke="url(#g)" stroke-width="5" stroke-linecap="round" stroke-opacity="0.9">
+    <path d="M262 232 H338"/>
+    <path d="M262 252 H318"/>
+    <path d="M262 272 H330"/>
+  </g>
+
+  <!-- declaration lines below the box -->
+  <g stroke-linecap="round">
+    <g stroke="url(#g)" stroke-width="9" stroke-opacity="0.85">
+      <path d="M188 414 H268"/>
+      <path d="M188 448 H248"/>
+    </g>
+    <g stroke="url(#g)" stroke-width="9" stroke-opacity="0.4">
+      <path d="M292 414 H396"/>
+      <path d="M272 448 H352"/>
+    </g>
+  </g>
+  <!-- colons -->
+  <g fill="url(#g)" fill-opacity="0.85">
+    <circle cx="278" cy="410" r="4"/><circle cx="278" cy="419" r="4"/>
+    <circle cx="258" cy="444" r="4"/><circle cx="258" cy="453" r="4"/>
+  </g>
+
+  <!-- color swatches -->
+  <g stroke="url(#g)" stroke-width="3.5">
+    <circle cx="380" cy="448" r="16" fill="url(#g)" fill-opacity="0.55"/>
+    <circle cx="418" cy="448" r="16" fill="url(#g)" fill-opacity="0.3"/>
+    <circle cx="456" cy="448" r="16" fill="url(#g)" fill-opacity="0.12"/>
+  </g>
+</svg>

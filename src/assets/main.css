@@ -1,2 +1,14 @@
 @import './base.css';
 @import 'tailwindcss';
+
+@theme {
+  --color-green-*: initial;
+  --color-green-100: #e6f7ec;
+  --color-green-500: #2bd960;
+  --color-green-900: #0a4723;
+  --font-sans: 'Arimo', 'Poppins', sans-serif;
+}
+
+html {
+  font-family: 'Blueface', 'Arimo', 'Poppins', sans-serif;
+}

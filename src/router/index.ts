@@ -13,7 +13,7 @@ const router = createRouter({
     { path: '/techs', name: 'techs', component: TechsPage },
     { path: '/contact', name: 'contact', component: ContactPage },
   ],
-  linkActiveClass: 'text-green-500 opacity-100',
+  linkActiveClass: 'text-green-500 opacity-100 font-bold',
 })
 
 export default router;

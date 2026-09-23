@@ -1,13 +1,15 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router';
 import Navigation from './components/Navigation.vue';
+import Footer from './components/Footer.vue';
 </script>
 
 <template>
   <Navigation/>
-  <main class="mx-auto max-w-5xl px-4 py-8 md:px-6">
+  <main>
     <RouterView />
   </main>
+  <Footer/>
 </template>
 
 <style scoped>
