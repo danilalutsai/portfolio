@@ -13,7 +13,7 @@
           <span class="text-green-500">reb</span>uild
         </h1>
       </div>
-      <h2 class="mt-5 mb-3 text-lg text-center text-gray-100 justify-center mx-auto max-w-100 leading-8">
+      <h2 class="mt-5 mb-3 text-lg text-center text-gray-100 justify-center mx-auto max-w-100 leading-8 ">
         Self-taught front-end developer based in Tallinn. I learned by building, breaking and
         rebuilding — and I'm still doing exactly that.</h2>
       <div class="flex justify-center gap-3 pt-5">
@@ -56,6 +56,8 @@
           <img src="./../assets/img/github-logo.png" alt="Github logo" width="40" height="40"
             class="opacity-50 hover:opacity-100 transition duration-300">
           <img src="./../assets/img/linkedin-logo.png" alt="LinkedIn logo" width="40" height="40"
+            class="grayscale hover:grayscale-0 transition duration-300">
+          <img src="./../assets/img/Telegram_logo.svg.webp" alt="LinkedIn logo" width="40" height="40"
             class="grayscale hover:grayscale-0 transition duration-300">
         </div>
       </div>
