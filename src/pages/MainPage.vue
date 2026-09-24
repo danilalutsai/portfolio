@@ -1,13 +1,31 @@
 <script setup lang="ts">
+import mailLogo from '@/assets/img/mail-logo.png';
+import githubLogo from '@/assets/img/github-logo.png';
+import linkedInLogo from '@/assets/img/linkedin-logo.png';
+import telegramLogo from '@/assets/img/telegram-logo.png';
+
+interface SocialMediaItem {
+  name: string;
+  url: string;
+  alt: string;
+  image: string;
+}
+
+const SocialMedia: SocialMediaItem[] = [
+  { name: 'mail', url: '/contact', alt: 'Mail', image: mailLogo },
+  { name: 'github', url: 'https://github.com/danilalutsai', alt: 'Github', image: githubLogo },
+  { name: 'linkedIn', url: 'https://www.linkedin.com/in/danila-lutsai-4a1b8b174/', alt: 'LinkedIn', image: linkedInLogo},
+  { name: 'telegram', url: 'https://t.me/danilalutsai', alt: 'Telegram', image: telegramLogo },
+];
 </script>
 
 <template>
-  <section class="flex z-100 justify-center min-h-full min-w-full bg-[url(./../assets/img/bg-waves-deep.svg)]
+  <section class="flex z-100 justify-center min-h-full w-full bg-[url(./../assets/img/bg-waves-deep.svg)]
     bg-cover bg-center bg-no-repeat shadow-[0_12px_30px_rgba(0,0,0,0.35)]">
-    <div class="mx-auto max-w-3xl center p-20 sm:p-40">
-      <div class="flex">
-        <img src="./../assets/img/dl-logo-bold-white.svg" alt="" class="max-w-50">
-        <h1 class="text-6xl text-white text-center my-5 max-w-150 mx-auto m-30 font-semibold">
+    <div class="mx-auto w-full max-w-3xl px-6 py-16 sm:px-10 sm:py-20">
+      <div class="flex flex-col items-center justify-center gap-6 sm:flex-row sm:gap-10">
+        <img src="./../assets/img/dl-logo-bold-white.svg" alt="" class="w-36 shrink-0 sm:w-44">
+        <h1 class="m-0 text-5xl leading-tight text-white text-center font-semibold sm:text-6xl">
           <span class="text-green-500">b</span>uild<br>
           <span class="text-green-500">br</span>eak<br>
           <span class="text-green-500">reb</span>uild
@@ -19,7 +37,7 @@
       <div class="flex justify-center gap-3 pt-5">
         <button class="min-w-5 border-4 border-gray-600 px-4 py-2 sm:px-6 sm:py-3 rounded-lg text-gray-600 text-lg
           hover:-translate-y-0.5 transition bg-green-500 hover:bg-green-500 hover:border-gray-600
-          hover:text-gray-600 hover:font-semibold cursor-pointer shadow-xl">
+          hover:text-gray-600 font-semibold cursor-pointer shadow-xl">
           About
         </button>
         <button
@@ -39,30 +57,44 @@
     </div>
   </section>
 
-  <section class="flex justify-center mx-auto p-10 bg-gray-200">
-    <div class="flex w-full max-w-4xl flex-col gap-8 p-10 border border-gray-300 shadow-xl rounded-xl
+  <section class="flex justify-center mx-auto p-4 sm:p-10 bg-gray-200">
+    <div class="flex w-full max-w-4xl flex-col gap-8 p-6 sm:p-10 border border-gray-300 shadow-xl rounded-xl
       md:flex-row md:justify-between bg-white translate-y-2 transition-transform duration-300">
       <div class="flex-1">
         <h1 class="border-b border-gray-300 p-3 mx-auto text-center uppercase font-medium
-          text-3xl text-gray-800">Danila Lutsai</h1>
+          text-2xl sm:text-3xl text-gray-800">Danila Lutsai</h1>
         <p class="p-5 text-gray-800">
           I’m a self-taught web developer from Tallinn, Estonia, with a growing passion for turning ideas into
           useful, thoughtful web experiences. I began my journey into programming at the start of 2026, driven
           by curiosity about how the websites and applications I use every day are made.
         </p>
-        <div class="p-5 flex border-t border-gray-300 left-0 gap-3 items-center">
-          <img src="./../assets/img/mail-logo.webp" alt="LinkedIn logo" width="40" height="40"
-            class="size-8 object-contain grayscale hover:grayscale-0 transition duration-300">
-          <img src="./../assets/img/github-logo.png" alt="Github logo" width="40" height="40"
-            class="opacity-50 hover:opacity-100 transition duration-300">
-          <img src="./../assets/img/linkedin-logo.png" alt="LinkedIn logo" width="40" height="40"
-            class="grayscale hover:grayscale-0 transition duration-300">
-          <img src="./../assets/img/Telegram_logo.svg.webp" alt="LinkedIn logo" width="40" height="40"
-            class="grayscale hover:grayscale-0 transition duration-300">
-        </div>
+        <ul class="flex flex-wrap items-center gap-3 ml-5">
+          <li v-for="socialMediaUnit in SocialMedia" :key="socialMediaUnit.url" class="inline-flex">
+            <a :href="socialMediaUnit.url" target="_blank" class="flex gap-3">
+              <img :src="socialMediaUnit.image" :alt="socialMediaUnit.alt" width="40" height="40"
+                class="flex gap-3 opacity-50 hover:opacity-100 hover:-translate-y-1 transition duration-200 cursor-pointer">
+            </a>
+          </li>
+        </ul>
       </div>
       <img src="./../assets/img/avatar.jpg" alt="Danila Lutsai" class="mx-auto h-48 w-48 shrink-0 rounded-full
         object-cover md:mx-0">
+    </div>
+  </section>
+  <section class="flex justify-center mx-auto p-4 sm:p-10 bg-gray-200">
+    <div class="flex w-full max-w-4xl flex-col gap-8 p-6 sm:p-10 border border-gray-300 shadow-xl rounded-xl
+      md:flex-row md:justify-between bg-white translate-y-2 transition-transform duration-300 justify-between">
+      <img src="./../assets/img/avatar-01.png" alt="Danila Lutsai" class="mx-auto h-68 w-68 shrink-0 rounded-xl
+        object-cover md:mx-0">
+      <div class="flex-1 max-w-50">
+        <h1 class="border-b border-gray-300 p-3 mx-auto text-center uppercase font-medium
+          text-2xl sm:text-3xl text-gray-800">Danila Lutsai</h1>
+        <p class="p-5 text-gray-800">
+          I’m a self-taught web developer from Tallinn, Estonia, with a growing passion for turning ideas into
+          useful, thoughtful web experiences. I began my journey into programming at the start of 2026, driven
+          by curiosity about how the websites and applications I use every day are made.
+        </p>
+      </div>
     </div>
   </section>
 </template>
