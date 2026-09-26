@@ -2,7 +2,7 @@
 @import './base.css';
 
 @theme {
-  --font-sans: 'Blueface', 'Arimo', 'Poppins', sans-serif;
+  --font-sans: 'Blueface-medium', 'Blueface', 'Arimo', 'Poppins', sans-serif;
   --font-nerd: 'Nerd Font', monospace;
   --font-pixel: 'PixelBasel', monospace;
   --color-green-500: #2bd960;
@@ -14,4 +14,5 @@
   --color-gray-600: oklch(44.6% 0.03 256.802);
   --color-gray-800: oklch(27.8% 0.033 256.848);
   --color-amber-100: oklch(96.2% 0.059 95.617);
+  --color-orange-500: #fab387;
 }

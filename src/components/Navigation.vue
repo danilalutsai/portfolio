@@ -85,10 +85,10 @@ watch(() => route.fullPath, () => {
             >{{ link.label }}</RouterLink>
           </li>
         </ul>
-        <ul class="inline-flex gap-2 py-4">
+        <ul class="inline-flex gap-2 py-4 opacity-60">
           <li v-for="media in SocialMedia" :key="media.url">
             <a :href="media.url" :aria-label="media.alt" :target="media.url.startsWith('http') ? '_blank' : undefined" :rel="media.url.startsWith('http') ? 'noopener noreferrer' : undefined">
-              <img :src="media.image" :alt="media.alt" class="h-[25px] w-[25px] opacity-70 transition-opacity hover:opacity-100" />
+              <img :src="media.image" :alt="media.alt" class="h-[25px] w-[25px] opacity-60 transition-all hover:-translate-y-0.5 duration-300 hover:opacity-100" />
             </a>
           </li>
         </ul>
