@@ -43,11 +43,12 @@ import bgGrayTexture from '@/assets/img/bg-gray-texture.png';
     </div>
   </section>
 
-  <section class="mx-auto flex justify-center sm:p-20 bg-[bgGrayTexture]">
+  <section :style="{ '--section-bg': `url(${bgGrayTexture})` }"
+  class="group bg-(image:--section-bg) bg-cover bg-center bg-no-repeat mx-auto flex justify-center sm:p-20 bg-[bgGrayTexture]">
     <div class="p-10 my-10 bg-white flex w-full max-w-276 flex-col gap-8 shadow-xl transition-transform duration-300 sm:p-10 md:flex-row md:justify-between rounderd-xl">
       <div class="min-w-0 flex-1 my-10">
-        <h2 class="border-b border-gray-300 p-5 text-left text-2xl leading-8 font-semibold text-gray-800 uppercase sm:text-3xl sm:leading-9">Danila Lutsai</h2>
-        <p class="p-5 text-gray-800 text-lg">
+        <h2 class="border-b border-gray-300 p-5 text-left text-2xl leading-8 font-semibold text-gray-600 uppercase sm:text-3xl sm:leading-9">Danila Lutsai</h2>
+        <p class="p-5 text-gray-500 text-lg">
           I’m a self-taught web developer from Tallinn, Estonia, with a growing passion for turning ideas into
           useful, thoughtful web experiences. I began my journey into programming at the start of 2026, driven
           by curiosity about how the websites and applications I use every day are made.
@@ -64,11 +65,11 @@ import bgGrayTexture from '@/assets/img/bg-gray-texture.png';
     </div>
   </section>
 
-  <section class="relative mx-auto flex justify-center overflow-hidden p-4 sm:p-10">
+  <section class="group relative mx-auto flex justify-center overflow-hidden p-4 sm:p-10">
     <img :src="warmPattern" alt="" class="absolute inset-0 h-full w-full object-cover" />
-    <div class="relative flex w-full max-w-276 flex-col gap-8 bg-transparent shadow-xl transition-transform duration-300 sm:p-10 md:flex-row md:justify-between">
+    <div class="relative flex w-full max-w-276 flex-col gap-8 shadow-xl transition-transform duration-300 sm:p-10 md:flex-row md:justify-between">
       <img src="./../assets/img/avatar-01.png" alt="Danila Lutsai" class="order-2 mx-auto aspect-square w-full max-w-80 shrink-0 self-center rounded-xl object-cover md:order-1 md:mx-0" />
-      <div class="order-1 min-w-0 flex-1 md:order-2 bg-white/10 hover:bg-white/20">
+      <div class="group:hover:bg-white/30 order-1 min-w-0 flex-1 md:order-2 bg-white/10 hover:bg-white/20">
         <h2 class="border-b border-gray-300 p-5 text-left text-2xl leading-8 font-semibold text-gray-50 uppercase sm:text-3xl sm:leading-9">Passion</h2>
         <p class="p-5 text-gray-200 text-lg">
           What I enjoy most about development is that it combines creativity with logic. There is always another
