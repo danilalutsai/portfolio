@@ -39,8 +39,8 @@ watch(() => route.fullPath, () => {
           <li v-for="link in links" :key="link.to">
             <RouterLink
               :to="link.to"
-              class="relative inline-block transition duration-300 hover:-translate-y-1 hover:opacity-100"
-              :class="route.path === link.to ? 'font-bold text-green-500 opacity-100' : 'text-black opacity-50'"
+              class="relative inline-block transition duration-300 hover:-translate-y-0.5 hover:opacity-100"
+              :class="route.path === link.to ? 'font-bold text-orange-500 opacity-100' : 'text-black opacity-50'"
             >{{ link.label }}</RouterLink>
           </li>
         </ul>
