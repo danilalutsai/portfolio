@@ -25,7 +25,7 @@
     "import/extensions": [
       "error",
       "never",
-      { "vue": "always", "css": "always", "json": "always", "svg": "always" }
+      { "vue": "always", "css": "always", "json": "always", "svg": "always", "png": "always" }
     ],
     "import/no-relative-parent-imports": "error",
     "import/first": "error",

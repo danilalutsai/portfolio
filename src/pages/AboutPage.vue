@@ -1,20 +1,21 @@
 <script setup lang="ts">
-
+import wavePattern from '@/assets/img/bg-waves-deep.svg';
 </script>
 
 <template>
-  <div class="page">
-    <div class="webName tracking-tighter leading-none items-center">
-      <div class="webName">Early in the career.<br /> Not early in the life.</div>
-    </div>
+  <div class="mx-auto w-full max-w-[1200px] px-6">
+    <h1 class="pb-6 text-center text-4xl leading-none tracking-[-0.05em]">
+      Early in the career.<br /> Not early in the life.
+    </h1>
 
-    <div class="hero">
+    <div class="relative grid grid-cols-1 items-start gap-12 overflow-hidden font-sans md:grid-cols-2">
+      <img :src="wavePattern" alt="" class="absolute inset-0 h-full w-full object-cover" />
 
-      <div class="hero-image">
-        <img src="./../assets/img/avatar-01.png" alt="">
+      <div class="relative">
+        <img src="./../assets/img/avatar-01.png" alt="" class="block h-auto w-full shadow-[0_4px_12px_rgb(0_0_0_/_0.12)]">
       </div>
 
-      <div class="main-info">
+      <div class="relative space-y-4">
         <p>Hello everyone. My name is Danila Lutsai, I'm 28, and I build things for the web.</p>
 
         <p>This site is my portfolio — a small, honest place to put my work, my thinking, and a bit of who I am outside the code. Nothing exhaustive, nothing inflated. Just a starting point.</p>
@@ -26,7 +27,7 @@
         <!-- <p>[new] The way I work is probably my most useful quality. I read documentation before I read tutorials. I break things on purpose to find out what holds them together. When something works and I don't know why, I treat that as a bug in my understanding rather than a win. It makes me slower on day one of anything, and considerably faster by week three.</p> -->
       </div>
 
-      <div class="main-info">
+      <div class="relative space-y-4">
         <p>What I care about in the work: interfaces that respect the person using them. Pages that load fast. Text you can actually read. Buttons where you expect buttons. A lot of the modern web has forgotten that a website is something a human being has to use, and I'd like to be part of the group that remembers.</p>
 
         <p>[new] Away from the keyboard I'm fairly easy to describe: I like things that reward patience. Long-form reading, problems that don't resolve in an afternoon, the particular satisfaction of a system you understand all the way down. I suspect that's the same instinct that pulled me into programming in the first place, just wearing different clothes.</p>
@@ -36,53 +37,10 @@
         <p>If any of that resonates, take a look at my projects — or just say hello.</p>
       </div>
 
-      <div class="hero-image">
-        <img src="./../assets/img/mountains.png" alt="">
+      <div class="relative">
+        <img src="./../assets/img/mountains.png" alt="" class="block h-auto w-full shadow-[0_4px_12px_rgb(0_0_0_/_0.12)]">
       </div>
 
     </div>
   </div>
 </template>
-
-<style scoped>
-.page {
-  max-width: 1200px;
-  width: 100%;
-  margin-inline: auto;
-  padding-inline: 1.5rem;
-  place-items: center;
-}
-
-.main {
-  justify-content: center;
-}
-
-.hero {
-  background: url('./../assets/img/bg-waves-deep.svg') center / cover no-repeat;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
-  align-items: start;
-  font-family: "Poppins";
-}
-
-.webName {
-  display: flex;
-  justify-content: center;
-  padding: 0rem;
-  padding-bottom: 1.5rem;
-  font-size: 36px;
-}
-
-.main-info p {
-  padding: 0 0 1rem;
-  width: 100%;
-}
-
-.hero-image img {
-  width: 100%;
-  box-shadow: 0 4px 12px rgb(0 0 0 / 0.12);
-  height: auto;
-  display: block;
-}
-</style>

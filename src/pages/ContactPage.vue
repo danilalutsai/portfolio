@@ -1,11 +1,11 @@
 <template>
-  <div class="page">
+  <div class="mx-auto max-w-[1200px] px-6">
     <h1>Contact Page</h1>
     <form action="submit" class="w-full">
-      <div class="submit-form flex">
+      <div class="flex flex-wrap gap-4">
         <div class="w-64">
           <p class="w-48">Firstname</p>
-          <input type="text" class="w-32 border">
+          <input type="text" class="w-32 border border-current">
         </div>
         <p>Firstname</p>
         <input type="text">
@@ -21,9 +21,3 @@
     </form>
   </div>
 </template>
-
-<style scoped>
-.page {
-  max-width: 1200px;
-}
-</style>

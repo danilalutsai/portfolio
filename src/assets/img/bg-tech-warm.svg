@@ -1,0 +1,178 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2560" height="1440"
+     viewBox="0 0 2560 1440" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <!-- Warm base: gold → amber → deep orange-red -->
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e8b84a"/>
+      <stop offset="0.28" stop-color="#e09a3a"/>
+      <stop offset="0.55" stop-color="#d46a2e"/>
+      <stop offset="0.82" stop-color="#c4452a"/>
+      <stop offset="1" stop-color="#9e2a22"/>
+    </linearGradient>
+
+    <radialGradient id="glowGold" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ffe08a" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#ffd060" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowOrange" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ff8c42" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#ff7040" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowRed" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ff5a3c" stop-opacity="0.32"/>
+      <stop offset="1" stop-color="#ff5a3c" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="wGold" x1="0" y1="0" x2="1" y2="0.4">
+      <stop offset="0" stop-color="#ffe9a8"/><stop offset="1" stop-color="#ffd060"/>
+    </linearGradient>
+    <linearGradient id="wOrange" x1="0" y1="0" x2="1" y2="0.4">
+      <stop offset="0" stop-color="#ffb070"/><stop offset="1" stop-color="#ff8c42"/>
+    </linearGradient>
+    <linearGradient id="wDeep" x1="0" y1="0" x2="1" y2="0.3">
+      <stop offset="0" stop-color="#ff6b3d"/><stop offset="1" stop-color="#e84a2e"/>
+    </linearGradient>
+
+    <linearGradient id="veil" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop offset="0" stop-color="#4a1f12" stop-opacity="0.08"/>
+      <stop offset="0.5" stop-color="#4a1f12" stop-opacity="0.14"/>
+      <stop offset="1" stop-color="#4a1f12" stop-opacity="0.2"/>
+    </linearGradient>
+
+    <!-- Soft hexagonal / node lattice (replaces circuit grid) -->
+    <pattern id="hexLattice" width="220" height="190" patternUnits="userSpaceOnUse">
+      <path d="M110 10 L190 55 L190 135 L110 180 L30 135 L30 55 Z"
+            fill="none" stroke="#ffffff" stroke-opacity="0.07" stroke-width="1.5"/>
+      <circle cx="110" cy="10" r="3.5" fill="#ffffff" fill-opacity="0.12"/>
+      <circle cx="190" cy="55" r="2.5" fill="#ffffff" fill-opacity="0.1"/>
+      <circle cx="190" cy="135" r="2.5" fill="#ffffff" fill-opacity="0.1"/>
+      <circle cx="110" cy="180" r="3.5" fill="#ffffff" fill-opacity="0.12"/>
+      <circle cx="30" cy="135" r="2.5" fill="#ffffff" fill-opacity="0.1"/>
+      <circle cx="30" cy="55" r="2.5" fill="#ffffff" fill-opacity="0.1"/>
+      <line x1="110" y1="10" x2="110" y2="180" stroke="#ffffff" stroke-opacity="0.04" stroke-width="1"/>
+    </pattern>
+
+    <!-- New IT / hardware silhouettes – much more transparent -->
+    <pattern id="itPattern" width="400" height="400" patternUnits="userSpaceOnUse"
+             patternTransform="rotate(-8)">
+      <!-- laptop isometric-ish -->
+      <g transform="translate(30,50)" opacity="0.55">
+        <path d="M8 42 L22 8 H92 L106 42 Z" fill="none" stroke="#000000" stroke-opacity="0.12" stroke-width="3.5"/>
+        <rect x="-8" y="42" width="122" height="11" rx="3" fill="#000000" fill-opacity="0.1"/>
+        <rect x="32" y="16" width="46" height="22" fill="none" stroke="#000000" stroke-opacity="0.1" stroke-width="2.5"/>
+      </g>
+
+      <!-- monitor -->
+      <g transform="translate(250,70)" opacity="0.5">
+        <rect x="0" y="0" width="85" height="55" rx="3" fill="none" stroke="#000000" stroke-opacity="0.11" stroke-width="3.5"/>
+        <rect x="36" y="55" width="13" height="18" fill="#000000" fill-opacity="0.1"/>
+        <rect x="18" y="73" width="49" height="7" rx="2" fill="#000000" fill-opacity="0.1"/>
+      </g>
+
+      <!-- microchip -->
+      <g transform="translate(70,220)" opacity="0.5">
+        <rect x="0" y="0" width="55" height="55" rx="5" fill="none" stroke="#000000" stroke-opacity="0.11" stroke-width="3.5"/>
+        <rect x="14" y="14" width="27" height="27" fill="#000000" fill-opacity="0.08"/>
+        <path d="M0 12 H-12 M0 28 H-12 M0 44 H-12 M55 12 H67 M55 28 H67 M55 44 H67
+                 M12 0 V-12 M28 0 V-12 M44 0 V-12 M12 55 V67 M28 55 V67 M44 55 V67"
+              stroke="#000000" stroke-opacity="0.1" stroke-width="2.5"/>
+      </g>
+
+      <!-- tower -->
+      <g transform="translate(260,240)" opacity="0.5">
+        <rect x="0" y="0" width="42" height="80" rx="3" fill="none" stroke="#000000" stroke-opacity="0.11" stroke-width="3.5"/>
+        <circle cx="21" cy="14" r="4.5" fill="none" stroke="#000000" stroke-opacity="0.1" stroke-width="2.5"/>
+        <rect x="9" y="32" width="24" height="3.5" fill="#000000" fill-opacity="0.08"/>
+        <rect x="9" y="42" width="24" height="3.5" fill="#000000" fill-opacity="0.08"/>
+      </g>
+
+      <!-- signal / wifi -->
+      <g transform="translate(170,320)" opacity="0.5">
+        <path d="M-18 0 A24 24 0 0 1 18 0" fill="none" stroke="#000000" stroke-opacity="0.11" stroke-width="3.5"/>
+        <path d="M-10 8 A14 14 0 0 1 10 8" fill="none" stroke="#000000" stroke-opacity="0.11" stroke-width="3.5"/>
+        <circle cx="0" cy="15" r="3" fill="#000000" fill-opacity="0.1"/>
+      </g>
+
+      <!-- small server rack hint -->
+      <g transform="translate(320,160)" opacity="0.45">
+        <rect x="0" y="0" width="38" height="70" rx="2" fill="none" stroke="#000000" stroke-opacity="0.1" stroke-width="3"/>
+        <rect x="6" y="10" width="26" height="4" fill="#000000" fill-opacity="0.07"/>
+        <rect x="6" y="22" width="26" height="4" fill="#000000" fill-opacity="0.07"/>
+        <rect x="6" y="34" width="26" height="4" fill="#000000" fill-opacity="0.07"/>
+        <circle cx="19" cy="55" r="4" fill="none" stroke="#000000" stroke-opacity="0.09" stroke-width="2"/>
+      </g>
+    </pattern>
+
+    <!-- Soft floating 3D plates (new depth layer) -->
+    <linearGradient id="plateGold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.14"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0.03"/>
+    </linearGradient>
+    <linearGradient id="plateWarm" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.1"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0.02"/>
+    </linearGradient>
+  </defs>
+
+  <!-- base gradient -->
+  <rect width="2560" height="1440" fill="url(#bg)"/>
+
+  <!-- depth glows – warmer, slightly softer -->
+  <ellipse cx="320" cy="200" rx="1400" ry="850" fill="url(#glowGold)"/>
+  <ellipse cx="2280" cy="1280" rx="1450" ry="900" fill="url(#glowOrange)"/>
+  <ellipse cx="1280" cy="720" rx="1050" ry="680" fill="url(#glowRed)"/>
+
+  <!-- large soft 3D capsules / plates – more layered, isometric tilt feel -->
+  <g opacity="0.85">
+    <!-- upper-left plate -->
+    <rect x="-180" y="-80" width="1180" height="480" rx="240"
+          fill="url(#plateGold)"
+          transform="rotate(-38 410 160)"/>
+    <!-- lower-right plate -->
+    <rect x="1520" y="880" width="1280" height="520" rx="260"
+          fill="url(#plateWarm)"
+          transform="rotate(-38 2160 1140)"/>
+    <!-- central soft ellipsoid -->
+    <ellipse cx="1280" cy="720" rx="580" ry="340" fill="url(#wDeep)" fill-opacity="0.05"/>
+    <!-- extra mid-depth plate for more 3D volume -->
+    <rect x="700" y="380" width="900" height="380" rx="190"
+          fill="#ffffff" fill-opacity="0.045"
+          transform="rotate(12 1150 570)"/>
+  </g>
+
+  <!-- hexagonal lattice – very low visibility -->
+  <rect width="2560" height="1440" fill="url(#hexLattice)"/>
+
+  <!-- accent nodes & paths – reduced opacity -->
+  <g stroke-linecap="round" fill="none">
+    <circle cx="380" cy="240" r="9" fill="url(#wGold)" fill-opacity="0.55"/>
+    <circle cx="860" cy="170" r="5.5" fill="url(#wGold)" fill-opacity="0.5"/>
+    <path d="M380 240 L860 170 L1300 320" stroke="url(#wGold)" stroke-opacity="0.28" stroke-width="2.5"/>
+    <circle cx="1300" cy="320" r="7" fill="url(#wOrange)" fill-opacity="0.5"/>
+    <circle cx="1780" cy="220" r="6" fill="url(#wOrange)" fill-opacity="0.45"/>
+    <path d="M1300 320 L1780 220 L2220 400" stroke="url(#wOrange)" stroke-opacity="0.26" stroke-width="2.5"/>
+    <circle cx="2220" cy="400" r="8" fill="url(#wDeep)" fill-opacity="0.5"/>
+
+    <circle cx="280" cy="800" r="8" fill="url(#wOrange)" fill-opacity="0.5"/>
+    <circle cx="720" cy="940" r="5.5" fill="url(#wOrange)" fill-opacity="0.45"/>
+    <path d="M280 800 L720 940 L1180 860" stroke="url(#wOrange)" stroke-opacity="0.24" stroke-width="2.5"/>
+    <circle cx="1180" cy="860" r="7" fill="url(#wDeep)" fill-opacity="0.5"/>
+    <circle cx="1640" cy="1000" r="6" fill="url(#wDeep)" fill-opacity="0.45"/>
+    <path d="M1180 860 L1640 1000 L2100 920" stroke="url(#wDeep)" stroke-opacity="0.26" stroke-width="2.5"/>
+    <circle cx="2100" cy="920" r="8" fill="url(#wGold)" fill-opacity="0.5"/>
+
+    <circle cx="520" cy="1220" r="7" fill="url(#wGold)" fill-opacity="0.45"/>
+    <circle cx="1000" cy="1160" r="5.5" fill="url(#wGold)" fill-opacity="0.4"/>
+    <path d="M520 1220 L1000 1160 L1480 1280" stroke="url(#wGold)" stroke-opacity="0.22" stroke-width="2.5"/>
+    <circle cx="1480" cy="1280" r="7" fill="url(#wOrange)" fill-opacity="0.45"/>
+    <circle cx="1940" cy="1180" r="6" fill="url(#wOrange)" fill-opacity="0.4"/>
+    <path d="M1480 1280 L1940 1180 L2380 1300" stroke="url(#wOrange)" stroke-opacity="0.22" stroke-width="2.5"/>
+    <circle cx="2380" cy="1300" r="8" fill="url(#wDeep)" fill-opacity="0.45"/>
+  </g>
+
+  <!-- legibility veil -->
+  <rect width="2560" height="1440" fill="url(#veil)"/>
+
+  <!-- IT silhouettes – higher transparency overall -->
+  <rect width="2560" height="1440" fill="url(#itPattern)"/>
+</svg>
