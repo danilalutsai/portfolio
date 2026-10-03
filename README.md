@@ -43,25 +43,27 @@ Custom palette, respects your OS preference, remembers your choice.
 
 Terminal aesthetic, website behaviour. Monospace throughout, window chrome on cards, prompt-style headings, a blinking CSS cursor, code blocks that look like terminal output. It's a costume, not an emulator — everything is standard links, buttons and forms, fully keyboard accessible.
 
-Colours live entirely in CSS custom properties. Two themes, one set of variables, no hardcoded values anywhere.
+Shared colours, fonts, shadows and easing live in Tailwind’s `@theme` configuration in `src/assets/css/main.css`. Components use utility classes for layout, typography, responsive breakpoints and interaction states.
 
 ---
 
 ## Tech
 
-| | |
-|---|---|
-| Framework | Vue 3.5 (Composition API, `<script setup>`) |
-| Language | TypeScript 6, strict + `noUncheckedIndexedAccess` |
-| Build | Vite 8 |
-| Routing | vue-router 5 |
-| State | Pinia 4 (setup syntax) |
-| Validation | Zod |
-| Runtime | Bun |
-| Tooling | oxlint, ESLint, Prettier |
-| Styling | Plain CSS — custom properties, Grid, Flexbox. No framework. |
+|            |                                                   |
+| ---------- | ------------------------------------------------- |
+| Framework  | Vue 3.5 (Composition API, `<script setup>`)       |
+| Language   | TypeScript 6, strict + `noUncheckedIndexedAccess` |
+| Build      | Vite 8                                            |
+| Routing    | vue-router 5                                      |
+| State      | Pinia 4 (setup syntax)                            |
+| Validation | Zod                                               |
+| Runtime    | Bun                                               |
+| Tooling    | oxlint, ESLint, Prettier                          |
+| Styling    | Tailwind CSS 4 through the official Vite plugin   |
 
-No UI library, no CSS framework, no component kit. Everything hand-built, which is the whole point.
+All pages and components use Tailwind utility classes directly in Vue templates. The stylesheet contains only the Tailwind import, theme tokens and local `@font-face` declarations. Tailwind Preflight supplies browser resets.
+
+Use `sm:` (640px) and `md:` (768px) utilities for responsive layouts, `hover:` and `group-hover:` for interactions, and the class props on Vue’s `<Transition>` for the mobile menu. GSAP targets `data-animate` attributes for scroll and entrance animations.
 
 ---
 

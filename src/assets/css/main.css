@@ -1,0 +1,87 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans:
+    'Avenir Next Medium', 'SF Pro Display', 'Cascadia Mono', 'Blueface-medium', 'Blueface', 'Arimo', 'Poppins', sans-serif;
+  --font-mono: 'Cascadia Mono', ui-monospace, monospace;
+  --font-nerd: 'Nerd Font', monospace;
+  --font-pixel: 'PixelBasel', monospace;
+  --color-green-500: #79d99e;
+  --color-orange-500: #fab387;
+  --shadow-card: 0 20px 25px -5px rgb(0 0 0 / 10%), 0 8px 10px -6px rgb(0 0 0 / 10%);
+  --shadow-photo: 0 4px 12px rgb(0 0 0 / 12%);
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Local font files; all layout and component styling uses Tailwind utilities. */
+@font-face {
+  font-family: 'Nerd Font';
+  src: url('../fonts/3270NerdFont-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Avenir Next';
+  src: url('./../fonts/AvenirNext-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PixelBasel';
+  src: url('../fonts/Pixelbasel-zr5Ll.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Blueface';
+  src: url('../fonts/blinkmacsystemfont-regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Blueface-semibold';
+  src: url('../fonts/blinkmacsystemfont-medium.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('../fonts/SF-Pro-Display-Thin.otf') format('opentype');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('../fonts/SF-Pro-Display-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('../fonts/SF-Pro-Display-Semibold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('../fonts/SF-Pro-Display-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}

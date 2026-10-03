@@ -33,90 +33,26 @@ const technologies = [
 </script>
 
 <template>
-  <div class="technologies-page">
-    <h1 class="page-heading"><span class="heading-accent">T</span>echnologies</h1>
+  <div class="flex w-full flex-col items-center gap-10">
+    <h1 class="mb-10 text-center text-4xl tracking-tighter">
+      <span class="text-green-500">T</span>echnologies
+    </h1>
 
     <section
       v-for="(technology, index) in technologies"
       :key="technology.title"
-      class="technology-card"
-      :class="{ 'technology-card-reversed': index % 2 === 1 }"
+      class="flex flex-col gap-5 rounded-2xl p-5 shadow-md sm:items-center sm:justify-center"
+      :class="index % 2 === 1 ? 'sm:flex-row-reverse' : 'sm:flex-row'"
     >
-      <div class="technology-copy">
-        <h2 class="technology-title">
+      <div class="max-w-150">
+        <h2
+          class="mb-2 border-l-4 border-green-500 pl-2 text-xl font-bold tracking-tighter uppercase"
+        >
           {{ technology.title }}
         </h2>
         <p>{{ technology.description }}</p>
       </div>
-      <img :src="technology.image" alt="" loading="lazy" class="technology-image" />
+      <img :src="technology.image" alt="" loading="lazy" class="max-h-100 sm:max-h-80" />
     </section>
   </div>
 </template>
-
-<style scoped>
-.technologies-page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2.5rem;
-  width: 100%;
-}
-
-.page-heading {
-  margin-bottom: 2.5rem;
-  font-size: 2.25rem;
-  line-height: 2.5rem;
-  letter-spacing: -0.05em;
-  text-align: center;
-}
-
-.heading-accent {
-  color: var(--color-green-500);
-}
-
-.technology-card {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-  padding: 1.25rem;
-  border-radius: 1rem;
-  box-shadow:
-    0 4px 6px -1px rgb(0 0 0 / 10%),
-    0 2px 4px -2px rgb(0 0 0 / 10%);
-}
-
-.technology-copy {
-  max-width: 37.5rem;
-}
-
-.technology-title {
-  margin-bottom: 0.5rem;
-  padding-left: 0.5rem;
-  border-left: 4px solid var(--color-green-500);
-  font-size: 1.25rem;
-  font-weight: 700;
-  line-height: 1.75rem;
-  letter-spacing: -0.05em;
-  text-transform: uppercase;
-}
-
-.technology-image {
-  max-height: 25rem;
-}
-
-@media (min-width: 40rem) {
-  .technology-card {
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .technology-card-reversed {
-    flex-direction: row-reverse;
-  }
-
-  .technology-image {
-    max-height: 20rem;
-  }
-}
-</style>

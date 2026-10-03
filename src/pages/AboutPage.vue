@@ -3,20 +3,26 @@ import wavePattern from '@/assets/img/bg-waves-deep.svg'
 </script>
 
 <template>
-  <div class="about-page">
-    <h1 class="page-heading">
+  <div class="mx-auto w-full max-w-300 px-6">
+    <h1 class="pb-6 text-center text-4xl leading-none tracking-tighter">
       Early in the career.<br />
       Not early in the life.
     </h1>
 
-    <div class="biography-grid">
-      <img :src="wavePattern" alt="" class="biography-background" />
+    <div
+      class="relative grid grid-cols-1 items-start gap-12 overflow-hidden font-sans md:grid-cols-2"
+    >
+      <img :src="wavePattern" alt="" class="absolute inset-0 h-full w-full object-cover" />
 
-      <div class="biography-image">
-        <img src="@/assets/img/avatar-01.png" alt="Danila Lutsai" class="biography-photo" />
+      <div class="relative">
+        <img
+          src="@/assets/img/avatar-01.png"
+          alt="Danila Lutsai"
+          class="block h-auto w-full shadow-photo"
+        />
       </div>
 
-      <div class="biography-copy">
+      <div class="relative space-y-4">
         <p>Hello everyone. My name is Danila Lutsai, I'm 28, and I build things for the web.</p>
         <p>
           This site is my portfolio — a small, honest place to put my work, my thinking, and a bit
@@ -38,7 +44,7 @@ import wavePattern from '@/assets/img/bg-waves-deep.svg'
         </p>
       </div>
 
-      <div class="biography-copy">
+      <div class="relative space-y-4">
         <p>
           What I care about in the work: interfaces that respect the person using them. Pages that
           load fast. Text you can actually read. Buttons where you expect buttons. A lot of the
@@ -61,71 +67,14 @@ import wavePattern from '@/assets/img/bg-waves-deep.svg'
         <p>If any of that resonates, take a look at my projects — or just say hello.</p>
       </div>
 
-      <div class="biography-image">
+      <div class="relative">
         <img
           src="@/assets/img/mountains.png"
           alt="Mountain landscape"
           loading="lazy"
-          class="biography-photo"
+          class="block h-auto w-full shadow-photo"
         />
       </div>
     </div>
   </div>
 </template>
-
-<style scoped>
-.about-page {
-  width: 100%;
-  max-width: 75rem;
-  margin-inline: auto;
-  padding-inline: 1.5rem;
-}
-
-.page-heading {
-  padding-bottom: 1.5rem;
-  font-size: 2.25rem;
-  line-height: 1;
-  letter-spacing: -0.05em;
-  text-align: center;
-}
-
-.biography-grid {
-  position: relative;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  align-items: start;
-  gap: 3rem;
-  overflow: hidden;
-  font-family: var(--font-sans);
-}
-
-.biography-background {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.biography-image,
-.biography-copy {
-  position: relative;
-}
-
-.biography-photo {
-  display: block;
-  width: 100%;
-  height: auto;
-  box-shadow: 0 4px 12px rgb(0 0 0 / 12%);
-}
-
-.biography-copy > :not(:last-child) {
-  margin-bottom: 1rem;
-}
-
-@media (min-width: 48rem) {
-  .biography-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-</style>

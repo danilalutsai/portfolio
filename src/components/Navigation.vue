@@ -31,34 +31,45 @@ watch(
 </script>
 
 <template>
-  <div class="navigation-accent"></div>
-  <div class="navigation-shell">
-    <header class="navigation-header">
-      <RouterLink to="/" aria-label="Home" class="brand-link">
+  <div class="h-2 bg-linear-to-r from-[#cba6f7] to-[#f38ba8]"></div>
+  <div class="border-b border-gray-200 p-5 text-[1.1rem]">
+    <header class="mx-auto flex max-w-5xl items-center justify-between">
+      <RouterLink to="/" aria-label="Home" class="font-normal text-black">
         <img :src="logo" alt="" width="30" height="30" />
       </RouterLink>
 
-      <nav class="desktop-nav" aria-label="Main">
-        <ul class="navigation-links">
+      <nav class="hidden items-center md:inline-flex" aria-label="Main">
+        <ul class="flex items-center gap-5">
           <li v-for="link in links" :key="link.to">
             <RouterLink
               :to="link.to"
-              class="navigation-link"
-              :class="{ 'is-active': route.path === link.to }"
-              >{{ link.label }}</RouterLink
+              class="relative inline-block transition-[translate,opacity,color] duration-300 ease-standard motion-reduce:transition-none"
+              :class="
+                route.path === link.to
+                  ? 'font-bold text-green-500 opacity-100'
+                  : 'text-black opacity-50 hover:opacity-70'
+              "
             >
+              {{ link.label }}
+            </RouterLink>
           </li>
         </ul>
-        <ul class="navigation-socials">
-          <li v-for="media in socialMediaNav" :key="media.url" class="social-link">
+        <ul class="ml-5 flex items-center gap-3">
+          <li v-for="media in socialMediaNav" :key="media.url" class="inline-flex">
             <a
               :href="media.url"
               :aria-label="media.alt"
               target="_blank"
               rel="noopener noreferrer"
-              class="social-link"
+              class="inline-flex"
             >
-              <img :src="media.image" :alt="media.alt" width="25" height="25" class="social-icon" />
+              <img
+                :src="media.image"
+                :alt="media.alt"
+                width="25"
+                height="25"
+                class="size-6.25 cursor-pointer opacity-50 transition-[translate,opacity] duration-300 ease-standard hover:opacity-70 motion-reduce:transition-none"
+              />
             </a>
           </li>
         </ul>
@@ -66,32 +77,52 @@ watch(
 
       <button
         type="button"
-        class="menu-toggle"
-        :class="{ 'is-open': isOpen }"
+        class="relative z-50 flex size-10 cursor-pointer flex-col items-center justify-center gap-1.5 md:hidden"
         :aria-expanded="isOpen"
         aria-controls="mobile-nav"
         aria-label="Toggle navigation"
         @click="isOpen = !isOpen"
       >
-        <span class="menu-line" />
-        <span class="menu-line" />
-        <span class="menu-line" />
+        <span
+          class="block h-0.5 w-6 bg-black transition-transform duration-300 ease-standard motion-reduce:transition-none"
+          :class="{ 'translate-y-2 rotate-45': isOpen }"
+        />
+        <span
+          class="block h-0.5 w-6 bg-black transition-opacity duration-300 ease-standard motion-reduce:transition-none"
+          :class="{ 'opacity-0': isOpen }"
+        />
+        <span
+          class="block h-0.5 w-6 bg-black transition-transform duration-300 ease-standard motion-reduce:transition-none"
+          :class="{ '-translate-y-2 -rotate-45': isOpen }"
+        />
       </button>
     </header>
 
-    <Transition name="mobile-menu">
-      <nav v-show="isOpen" id="mobile-nav" class="mobile-nav" aria-label="Mobile">
-        <ul class="mobile-links">
+    <Transition
+      enter-active-class="transition-[max-height,opacity] duration-300 ease-out motion-reduce:transition-none"
+      enter-from-class="max-h-0 opacity-0"
+      enter-to-class="max-h-96 opacity-100"
+      leave-active-class="transition-[max-height,opacity] duration-200 ease-in motion-reduce:transition-none"
+      leave-from-class="max-h-96 opacity-100"
+      leave-to-class="max-h-0 opacity-0"
+    >
+      <nav v-show="isOpen" id="mobile-nav" class="overflow-hidden md:hidden" aria-label="Mobile">
+        <ul class="flex flex-col py-2">
           <li v-for="link in links" :key="link.to">
             <RouterLink
               :to="link.to"
-              class="mobile-link"
-              :class="{ 'is-active': route.path === link.to }"
-              >{{ link.label }}</RouterLink
+              class="block py-1 transition-opacity duration-150 ease-standard hover:opacity-100 motion-reduce:transition-none"
+              :class="
+                route.path === link.to
+                  ? 'font-bold text-green-500 opacity-100'
+                  : 'text-black opacity-40'
+              "
             >
+              {{ link.label }}
+            </RouterLink>
           </li>
         </ul>
-        <ul class="mobile-socials">
+        <ul class="inline-flex gap-2 py-4 opacity-50">
           <li v-for="media in SocialMedia" :key="media.url">
             <a
               :href="media.url"
@@ -99,7 +130,11 @@ watch(
               :target="media.url.startsWith('http') ? '_blank' : undefined"
               :rel="media.url.startsWith('http') ? 'noopener noreferrer' : undefined"
             >
-              <img :src="media.image" :alt="media.alt" class="mobile-social-icon" />
+              <img
+                :src="media.image"
+                :alt="media.alt"
+                class="size-6.25 opacity-60 transition-[translate,opacity] duration-300 ease-standard hover:opacity-70 motion-reduce:transition-none"
+              />
             </a>
           </li>
         </ul>
@@ -107,199 +142,3 @@ watch(
     </Transition>
   </div>
 </template>
-
-<style scoped>
-.navigation-accent {
-  height: 0.5rem;
-  background: linear-gradient(to right in oklab, #75ff9f, #69a8fa);
-}
-
-.navigation-shell {
-  padding: 1.25rem;
-  border-bottom: 1px solid var(--color-gray-200);
-}
-
-.navigation-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  max-width: 64rem;
-  margin-inline: auto;
-}
-
-.brand-link {
-  color: black;
-  font-weight: 400;
-}
-
-.desktop-nav {
-  display: none;
-  align-items: center;
-}
-
-.navigation-links,
-.navigation-socials {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.navigation-link {
-  position: relative;
-  display: inline-block;
-  color: black;
-  opacity: 0.5;
-  transition:
-    translate 300ms var(--ease-standard),
-    opacity 300ms var(--ease-standard),
-    color 300ms var(--ease-standard);
-}
-
-.navigation-link.is-active {
-  color: var(--color-orange-500);
-  font-weight: 700;
-  opacity: 1;
-}
-
-.navigation-socials {
-  gap: 0.75rem;
-  margin-left: 1.25rem;
-}
-
-.social-link {
-  display: inline-flex;
-}
-
-.social-icon,
-.mobile-social-icon {
-  width: 25px;
-  height: 25px;
-  transition:
-    translate 300ms var(--ease-standard),
-    opacity 300ms var(--ease-standard);
-}
-
-.social-icon {
-  cursor: pointer;
-  opacity: 0.5;
-}
-
-.mobile-links {
-  display: flex;
-  flex-direction: column;
-  padding-block: 0.5rem;
-}
-
-.mobile-link {
-  display: block;
-  padding-block: 0.25rem;
-  color: black;
-  opacity: 0.7;
-  transition: opacity 150ms var(--ease-standard);
-}
-
-.mobile-link.is-active {
-  color: var(--color-green-500);
-  opacity: 1;
-}
-
-.mobile-socials {
-  display: inline-flex;
-  gap: 0.5rem;
-  padding-block: 1rem;
-  opacity: 0.6;
-}
-
-.mobile-social-icon {
-  opacity: 0.6;
-}
-
-@media (hover: hover) {
-  .navigation-link:hover,
-  .social-icon:hover,
-  .mobile-social-icon:hover {
-    translate: 0 -0.125rem;
-    opacity: 1;
-  }
-
-  .mobile-link:hover {
-    opacity: 1;
-  }
-}
-
-@media (min-width: 48rem) {
-  .desktop-nav {
-    display: inline-flex;
-  }
-}
-
-.menu-toggle {
-  position: relative;
-  z-index: 50;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.375rem;
-  width: 2.5rem;
-  height: 2.5rem;
-  cursor: pointer;
-}
-
-.menu-line {
-  display: block;
-  width: 1.5rem;
-  height: 0.125rem;
-  background-color: black;
-  transition:
-    transform 300ms var(--ease-standard),
-    opacity 300ms var(--ease-standard);
-}
-
-.menu-toggle.is-open .menu-line:first-child {
-  transform: translateY(0.5rem) rotate(45deg);
-}
-
-.menu-toggle.is-open .menu-line:nth-child(2) {
-  opacity: 0;
-}
-
-.menu-toggle.is-open .menu-line:last-child {
-  transform: translateY(-0.5rem) rotate(-45deg);
-}
-
-.mobile-nav {
-  overflow: hidden;
-}
-
-.mobile-menu-enter-active {
-  transition:
-    max-height 300ms cubic-bezier(0, 0, 0.2, 1),
-    opacity 300ms cubic-bezier(0, 0, 0.2, 1);
-}
-
-.mobile-menu-leave-active {
-  transition:
-    max-height 200ms cubic-bezier(0.4, 0, 1, 1),
-    opacity 200ms cubic-bezier(0.4, 0, 1, 1);
-}
-
-.mobile-menu-enter-from,
-.mobile-menu-leave-to {
-  max-height: 0;
-  opacity: 0;
-}
-
-.mobile-menu-enter-to,
-.mobile-menu-leave-from {
-  max-height: 24rem;
-  opacity: 1;
-}
-
-@media (min-width: 48rem) {
-  .menu-toggle,
-  .mobile-nav {
-    display: none;
-  }
-}
-</style>
