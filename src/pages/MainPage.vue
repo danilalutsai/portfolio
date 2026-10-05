@@ -1,59 +1,92 @@
 <script setup lang="ts">
 import { gsap } from 'gsap'
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { onMounted, onUnmounted, ref } from 'vue'
-import { RouterLink } from 'vue-router'
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { onMounted, onUnmounted, ref } from 'vue';
+import { RouterLink } from 'vue-router';
 
 import { SocialMedia } from '@/data/socialMedia'
-import heroPattern from '@/assets/img/bg-main-about.png'
-import warmPattern from '@/assets/img/bg-tech-warm.svg'
+import heroPattern from '@/assets/img/bg-main-about.png';
+import warmPattern from '@/assets/img/bg-tech-warm.svg';
 
 const hero = ref<HTMLElement | null>(null)
-const aboutSection = ref<HTMLElement | null>(null)
-const passionSection = ref<HTMLElement | null>(null)
+const aboutSection = ref<HTMLElement | null>(null);
+const passionSection = ref<HTMLElement | null>(null);
+const footerSection = ref<HTMLElement | null>(null);
 let motion: ReturnType<typeof gsap.matchMedia> | undefined
 
 function animateHero() {
   gsap
     .timeline()
-    .from('[data-animate="hero-bg"]', { opacity: 0, duration: 1 })
-    .from('[data-animate="hero-line"]', { opacity: 0, y: 20, duration: 0.5, stagger: 0.12 }, 0.2)
-    .from('[data-animate="hero-summary"]', { opacity: 0, y: 16, duration: 0.5 }, 0.5)
+    .from(
+      '[data-animate="hero-bg"]',
+      {
+        opacity: 0,
+        duration: 1,
+      }
+    )
+    .from(
+      '[data-animate="hero-line"]',
+      {
+        opacity: 0,
+        y: 20,
+        duration: 0.5,
+        stagger: 0.12,
+      },
+      0.2
+    )
+    .from(
+      '[data-animate="hero-summary"]',
+      {
+        opacity: 0,
+        y: 16,
+        duration: 0.5,
+      },
+      0.5
+    )
     // Animate the wrapper so each button's transform stays available for CSS hover.
-    .from('[data-animate="hero-actions"]', { opacity: 0, y: 16, duration: 0.5 }, 0.6)
+    .from(
+      '[data-animate="hero-actions"]',
+      {
+        opacity: 0,
+        y: 16,
+        duration: 0.5,
+      },
+      0.6
+    )
 }
 
 function animateAbout(section: HTMLElement) {
   // Animate the card and text when the section scrolls into view.
   gsap
     .timeline({
-      defaults: { ease: 'power3.out' },
+      defaults: {
+        ease: 'power3.out',
+      },
       scrollTrigger: {
         trigger: section,
         start: 'top 75%',
         once: true,
       },
     })
-    .from('[data-animate="about-card"]', {
-      opacity: 0,
-      y: 35,
-      duration: 0.7,
-    })
+    .from(
+      '[data-animate="about-card"]',
+      { opacity: 0, duration: 0.7 }
+    )
     .from(
       '[data-animate="about-heading"]',
       { opacity: 0, y: 16, duration: 0.5 },
-      0.2,
+      0.2
     )
     .from(
       '[data-animate="about-copy"]',
       { opacity: 0, y: 16, duration: 0.6 },
-      0.35,
+      0.35
     )
     .from(
       '[data-animate="about-socials"]',
       { opacity: 0, y: 12, duration: 0.5 },
-      0.5,
+      0.5
     )
 
   // Animate the photo separately when the photo scrolls into view.
@@ -78,19 +111,49 @@ function animateAbout(section: HTMLElement) {
 
 function animatePassion(section: HTMLElement) {
   gsap
-    .timeline({
-      defaults: { ease: 'power3.out' },
-      scrollTrigger: { trigger: section, start: 'top 75%', once: true },
-    })
-    .from('[data-animate="passion-content"]', { opacity: 0, y: 35, duration: 0.7 })
-    .from('[data-animate="passion-photo"]', { opacity: 0, x: -30, duration: 0.7 }, 0.2)
-    .from('[data-animate="passion-text"]', { opacity: 0, y: 20, duration: 0.7 }, 0.35)
+    .timeline(
+      { defaults: {
+        ease: 'power3.out',
+      }, scrollTrigger: {
+        trigger: section,
+        start: 'top 75%',
+        once: true,
+      } }
+    )
+    .from(
+      '[data-animate="passion-content"]',
+      {
+        opacity: 0,
+        y: 35,
+        duration: 0.7,
+      }
+    )
+    .from(
+      '[data-animate="passion-photo"]',
+      {
+        opacity: 0,
+        x: -30,
+        duration: 0.7,
+      },
+      0.2
+    )
+    .from(
+      '[data-animate="passion-text"]',
+      {
+        opacity: 0,
+        y: 20,
+        duration: 0.7,
+      },
+      0.35
+    )
 }
 
 function scrollToAbout() {
   if (!aboutSection.value) return
   gsap.to(window, {
-    duration: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 1,
+    duration: window.matchMedia(
+      '(prefersmreduced-motion: reduce)'
+    ).matches ? 0 : 1,
     ease: 'power2.inOut',
     scrollTo: {
       y: aboutSection.value,
@@ -99,6 +162,63 @@ function scrollToAbout() {
     },
     overwrite: 'auto',
   })
+}
+
+function scrollToBottom() {
+  if (!passionSection.value) return
+  gsap.to(window, {
+    duration: window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches ? 0 : 1,
+    ease: 'power2.inOut',
+    scrollTo: {
+      y: passionSection.value,
+      offsetY:0,
+      autoKill: true,
+    },
+    overwrite: 'auto',
+  })
+}
+
+function animateFooter() {
+  gsap
+    .timeline()
+    .from(
+      '[data-animate="hero-bg"]',
+      {
+        opacity: 0,
+        duration: 1,
+      }
+    )
+    .from(
+      '[data-animate="hero-line"]',
+      {
+        opacity: 0,
+        y: 20,
+        duration: 0.5,
+        stagger: 0.12,
+      },
+      0.2
+    )
+    .from(
+      '[data-animate="hero-summary"]',
+      {
+        opacity: 0,
+        y: 16,
+        duration: 0.5,
+      },
+      0.5
+    )
+    // Animate the wrapper so each button's transform stays available for CSS hover.
+    .from(
+      '[data-animate="hero-actions"]',
+      {
+        opacity: 0,
+        y: 16,
+        duration: 0.5,
+      },
+      0.6
+    )
 }
 
 onMounted(() => {
@@ -113,6 +233,8 @@ onMounted(() => {
 
   const passion = passionSection.value
   if (passion) motion.add(reducedMotionQuery, () => animatePassion(passion), passion)
+
+  const footer = footerSection.value
 })
 
 onUnmounted(() => {
@@ -121,10 +243,8 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <section
-    ref="hero"
-    class="relative z-10 flex min-h-dvh w-full items-center justify-center overflow-hidden"
-  >
+  <section ref="hero" class="relative z-10 flex min-h-dvh w-full items-center
+    justify-center overflow-hidden">
     <img
       data-animate="hero-bg"
       :src="heroPattern"
@@ -132,24 +252,36 @@ onUnmounted(() => {
       class="absolute inset-0 h-full w-full object-cover"
     />
 
-    <div class="relative mx-auto w-full max-w-3xl px-6 py-16 sm:px-10 sm:pt-0 sm:pb-20">
-      <div class="flex flex-col items-center justify-center gap-6 sm:flex-row sm:gap-10">
-        <h1 class="text-right font-mono text-5xl leading-none font-semibold text-white sm:text-6xl">
-          <span data-animate="hero-line" class="block"
-            ><span class="text-green-500">b</span>uild</span
+    <div class="relative mx-auto w-full max-w-3xl px-6 py-26 sm:px-10 sm:pt-0">
+      <div
+        class="flex flex-col items-center justify-center gap-16 sm:flex-row sm:gap-20"
+      >
+        <h1
+          class="text-right font-mono text-5xl leading-none font-semibold text-white sm:text-6xl"
+        >
+          <span
+            data-animate="hero-line"
+            class="block"
+          ><span
+            class="text-green-500"
+          >b</span>uild</span
           >
-          <span data-animate="hero-line" class="block"
-            ><span class="text-green-500">b</span>reak</span
+          <span
+            data-animate="hero-line"
+            class="block"
+          ><span class="text-green-500">b</span>reak</span
           >
-          <span data-animate="hero-line" class="block"
-            >re<span class="text-green-500">b</span>uild</span
+          <span
+            data-animate="hero-line"
+            class="block"
+          >re<span class="text-green-500">b</span>uild</span
           >
         </h1>
       </div>
 
       <p
         data-animate="hero-summary"
-        class="mx-auto mt-5 mb-3 max-w-100 text-center font-mono text-lg leading-8 font-semibold text-gray-100"
+        class="mx-auto mt-8 mb-8 max-w-100 text-center font-mono text-lg leading-8 font-semibold text-gray-100"
       >
         Self-taught front-end developer based in Tallinn. I learned by building, breaking and
         rebuilding — and I'm still doing exactly that.
@@ -161,7 +293,7 @@ onUnmounted(() => {
           class="inline-flex cursor-pointer items-center rounded-lg border-4
           bg-green-500 px-4 py-2 text-lg font-semibold text-gray-600
           shadow-card transition-transform duration-300 ease-standard
-          hover:-translate-y-[0.2rem] hover:duration-100 motion-reduce:transition-none
+            hover:-translate-y-[0.3rem] hover:duration-200 motion-reduce:transition-none
           sm:px-6 sm:py-3 border-green-500"
           @click="scrollToAbout"
         >
@@ -172,7 +304,7 @@ onUnmounted(() => {
           class="group inline-flex cursor-pointer items-center rounded-lg
           border-4 bg-green-500 px-4 py-2 text-lg font-semibold text-gray-600
           shadow-card transition-transform duration-300 ease-standard
-          hover:-translate-y-[0.2rem] hover:duration-100 motion-reduce:transition-none
+          hover:-translate-y-[0.3rem] hover:duration-200 motion-reduce:transition-none
           sm:px-6 sm:py-3 min-w-5 border-gray-600"
         >Get in touch
           <span
@@ -183,8 +315,9 @@ onUnmounted(() => {
             motion-reduce:transition-none"
           >
             <!-- The straight line -->
+            <div>
             <span
-              class="absolute left-[3px] top-1/2 h-[4px] w-[18px]
+              class="absolute left-0.75 top-1/2 h-1 w-4.5
               origin-right -translate-y-1/2
               scale-x-0 rounded-full bg-current opacity-0
               transition-[scale,opacity] duration-300
@@ -198,15 +331,16 @@ onUnmounted(() => {
               -translate-y-1/2 -rotate-45 rounded-full"
             >
               <span
-                class="absolute bottom-0 left-0 h-[4px] w-full
+                class="absolute bottom-0 left-0 h-1 w-full
                 rounded-full bg-current"
               ></span>
 
               <span
-                class="absolute right-0 top-0 h-full w-[4px]
+                class="absolute right-0 top-0 h-full w-1
                 rounded-full bg-current"
               ></span>
             </span>
+            </div>
           </span>
 
         </RouterLink>
@@ -227,12 +361,13 @@ onUnmounted(() => {
         stroke-width="3"
         stroke-linecap="round"
         stroke-linejoin="round"
-        class="size-10 transition-transform duration-300 group-hover:translate-y-2 motion-reduce:transition-none"
+        class="size-10 transition-transform duration-300 group-hover:translate-y-2
+            motion-reduce:transition-none"
       >
         <path d="m5 9 7 7 7-7" />
       </svg>
             <span
-              class="absolute left-[22px] top-[45px] h-[25px] w-[4px]
+              class="absolute left-5.5 top-11.25 h-5 w-1
               origin-center -translate-y-1/2
               scale-y-0 rounded-full opacity-0 bg-current
               transition-[scale,opacity] duration-300
@@ -250,7 +385,9 @@ onUnmounted(() => {
   >
     <div
       data-animate="about-card"
-      class="flex w-full rounded-xl max-w-276 flex-col gap-8 border border-[#e0e0e0] bg-white p-10 shadow-card transition-transform duration-300 ease-standard md:my-10 md:flex-row md:justify-between"
+      class="relative flex w-full rounded-xl max-w-276 flex-col gap-8 border
+      border-[#e0e0e0] bg-white p-10 pb-24 shadow-card transition-transform
+      duration-300 ease-standard md:flex-row md:justify-between"
     >
       <div class="min-w-0 flex-1 md:mb-10">
         <h2
@@ -294,6 +431,35 @@ onUnmounted(() => {
         alt="Danila Lutsai"
         class="m-5 aspect-square w-full max-w-60 shrink-0 self-center rounded-full object-cover"
       />
+        <button
+        type="button"
+        aria-label="Scroll to Bottom"
+        class="group absolute bottom-10 left-1/2 flex size-12
+       -translate-x-1/2 cursor-pointer items-center justify-center text-gray-500"
+        @click="scrollToBottom"
+      >
+        <svg
+          aria-hidden="true"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="3"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="size-10 transition-transform duration-300 group-hover:translate-y-2 motion-reduce:transition-none"
+      >
+        <path d="m5 9 7 7 7-7" />
+      </svg>
+
+            <span
+              class="absolute bottom-6 left-[21.5px] top-6.75 h-7 w-1.25
+              origin-center -translate-y-1/2
+              scale-y-0 rounded-full opacity-0 bg-current
+              transition-[scale,opacity] duration-300
+              group-hover:scale-y-100 group-hover:opacity-100
+              motion-reduce:transition-none"
+            ></span>
+    </button>
     </div>
   </section>
 
@@ -306,7 +472,7 @@ onUnmounted(() => {
       data-animate="passion-content"
       class="bg-white relative flex h-full max-w-276 flex-col gap-8 shadow-card
       transition-transform duration-300 ease-standard lg:flex-row
-      lg:justify-between p-10 my-20 rounded-xl"
+      lg:justify-between p-10 my-10 rounded-xl"
     >
       <img
         data-animate="passion-photo"
