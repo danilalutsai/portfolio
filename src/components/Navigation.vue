@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 
 import { SocialMedia } from '@/data/socialMedia'
@@ -8,10 +8,10 @@ import githubLogo from '@/assets/img/github-logo.png'
 import telegramLogo from '@/assets/img/telegram-logo.png'
 
 const links = [
-  { label: 'Main', to: '/' },
-  { label: 'About', to: '/about' },
-  { label: 'Techs', to: '/techs' },
-  { label: 'Contact', to: '/contact' },
+  { label: 'Main', to: '/', gradient: 'from-[#f38ba8] to-[#cba6f7]' },
+  { label: 'About', to: '/about', gradient: 'from-[#cba6f7] to-[#89b4fa]' },
+  { label: 'Techs', to: '/techs', gradient: 'from-[#89b4fa] to-[#a6e3a1]' },
+  { label: 'Contact', to: '/contact', gradient: 'from-[#cba6f7] to-[#fab387]' },
 ]
 
 const socialMediaNav = [
@@ -21,6 +21,13 @@ const socialMediaNav = [
 
 const isOpen = ref(false)
 const route = useRoute()
+const currentGradient = computed(
+  () => {
+    return links.find((link) => {
+      return link.to === route.path
+    })?.gradient ?? 'from-[#cba6f7] to-[#f38ba8]'
+  },
+)
 
 watch(
   () => route.fullPath,
@@ -31,7 +38,7 @@ watch(
 </script>
 
 <template>
-  <div class="h-2 bg-linear-to-r from-[#cba6f7] to-[#f38ba8]"></div>
+  <div class="h-2 bg-linear-to-r" :class="currentGradient" aria-hidden="true"></div>
   <div class="border-b border-gray-200 p-5 text-[1.1rem]">
     <header class="mx-auto flex max-w-5xl items-center justify-between">
       <RouterLink to="/" aria-label="Home" class="font-normal text-black">

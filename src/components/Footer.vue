@@ -1,8 +1,10 @@
 <script setup lang="ts">
+import heroPattern from '@/assets/img/bg-main-about.png';
 
 interface FooterLink {
   label: string;
   href: string;
+  target?: string;
 }
 
 interface FooterColumn {
@@ -20,6 +22,7 @@ const columns: FooterColumn[] = [
       {
         label: "Techs",
         href: "/techs",
+
       },
       {
         label: "About",
@@ -37,6 +40,7 @@ const columns: FooterColumn[] = [
       {
         label: "GitHub",
         href: "https://github.com/danilalutsai",
+        target: "_blank",
       },
       {
         label: "LinkedIn",
@@ -95,7 +99,13 @@ const columns: FooterColumn[] = [
 </script>
 
 <template>
-  <footer class="bg-linear-to-r from-[#302044] to-[#64364C]">
+  <footer
+    class="relative isolate bg-cover bg-center bg-gray-600"
+  >
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute inset-0 -z-10 bg-black/50"
+    </div>
     <nav
       aria-label="Footer"
       class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 p-10 min-w-50  "
@@ -111,13 +121,13 @@ const columns: FooterColumn[] = [
             :key="link.href"
           ><a
               :href="link.href"
-              class="text-gray-400 hover:text-gray-100 text-md"
+              class="opacity-60 text-white hover:opacity-90 text-md"
             >{{ link.label }}</a></li>
         </ul>
       </div>
     </nav>
     <div
-      class="flex mx-auto justify-center pt-10 pb-5 text-gray-500"
+      class="flex mx-auto justify-center pt-10 pb-5 text-white opacity-50"
     ><span>Copyright &#169; 2026 Danila Lutsai</span>
     </div>
   </footer>
