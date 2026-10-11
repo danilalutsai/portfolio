@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import contactBackground from '@/assets/img/bg-hero-contact.png'
-import * as z from "zod";
-
-const myRegistry = z.registry<{ description: string }>();
+import z from 'zod';
 
 const fields = [
   { name: 'firstName', label: 'First name', type: 'text', autocomplete: 'given-name' },
@@ -14,12 +12,10 @@ const fields = [
 ]
 
 const message = {
-  name: 'message', label: 'Message', type: 'textarea', autocomplete: 'message',
+  name: 'message', label: 'Message', type: 'text', autocomplete: 'message',
 }
 
-
-Player.validate({ username: "billie", xp: 100 }); // true
-Player.validate({ username: 42, xp: "100" });     // false
+console.log(`There is somee ${message} waiting for you.`);
 
 </script>
 

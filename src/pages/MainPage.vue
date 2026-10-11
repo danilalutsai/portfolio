@@ -206,6 +206,7 @@ function animateFooter() {
       },
       0.5
     )
+
     // Animate the wrapper so each button's transform stays available for CSS hover.
     .from(
       '[data-animate="hero-actions"]',
