@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { gsap } from 'gsap'
-import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
+import { gsap } from 'gsap';
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { onMounted, onUnmounted, ref } from 'vue';
 import { RouterLink } from 'vue-router';
@@ -13,7 +13,7 @@ const hero = ref<HTMLElement | null>(null)
 const aboutSection = ref<HTMLElement | null>(null);
 const passionSection = ref<HTMLElement | null>(null);
 const footerSection = ref<HTMLElement | null>(null);
-let motion: ReturnType<typeof gsap.matchMedia> | undefined
+let motion: ReturnType<typeof gsap.matchMedia> | undefined;
 
 function animateHero() {
   gsap
