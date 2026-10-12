@@ -145,6 +145,8 @@ function animatePassion(section: HTMLElement) {
     )
 }
 
+const word: string = 'aa';
+
 function scrollToAbout() {
   if (!aboutSection.value) return;
   gsap.to(window, {
