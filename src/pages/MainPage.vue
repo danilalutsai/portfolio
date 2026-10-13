@@ -27,7 +27,7 @@ function animateHero() {
       {
         opacity: 0,
         y: 20,
-        duration: 0.5,
+        duration: 1,
         stagger: 0.12,
       },
       0.2
