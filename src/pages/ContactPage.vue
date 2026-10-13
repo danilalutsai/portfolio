@@ -1,26 +1,79 @@
 <script setup lang="ts">
 import contactBackground from '@/assets/img/bg-hero-contact.png'
-import z from 'zod';
+import { gsap } from 'gsap';
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { onMounted } from 'vue';
+import { ref } from 'vue';
+import * as z from 'zod';
 
-const fields = [
+let motion: ReturnType<typeof gsap.matchMedia> | undefined;
+const contact = ref<HTMLElement | null>(null)
+
+const fields = ref([
   { name: 'firstName', label: 'First name', type: 'text', autocomplete: 'given-name' },
   { name: 'lastName', label: 'Last name', type: 'text', autocomplete: 'family-name' },
   { name: 'country', label: 'Country', type: 'text', autocomplete: 'country-name' },
   { name: 'city', label: 'City', type: 'text', autocomplete: 'address-level2' },
   { name: 'phone', label: 'Phone number', type: 'tel', autocomplete: 'tel' },
   { name: 'email', label: 'Email', type: 'email', autocomplete: 'email' },
-]
+  { name: 'contact', label: 'Contact', type: 'contact', autocomplete: 'contact' },
+])
 
-const message = {
-  name: 'message', label: 'Message', type: 'text', autocomplete: 'message',
+const formData = ref({
+  firstName: '',
+  lastName: '',
+  country: '',
+  city: '',
+  phoneNumber: '',
+  email: '',
+  message: '',
+});
+
+const emailSchema = z.email();
+
+const colors = z.literal(['red', 'green', 'blue' ]);
+console.log(colors);
+
+function animateForm() {
+  gsap
+    .timeline()
+    .from(
+      '[data-animate="main-contact"]',
+      {
+        opacity: 0,
+        duration: 1,
+        y: 20,
+      },
+    )
 }
 
-console.log(`There is somee ${message} waiting for you.`);
+console.log(fields);
+
+const message = {
+  name: 'message',
+  label: 'Message',
+  type: 'text',
+  autocomplete: 'message',
+}
+
+console.log(`There is some ${message} waiting for you.`);
+
+onMounted(() => {
+  gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
+  motion = gsap.matchMedia()
+
+  const contactElement = contact.value
+});
 
 </script>
 
 <template>
-  <section class="relative isolate grid min-h-screen w-full place-items-center content-center bg-gray-600
+  <section
+    ref="contact"
+    data-animate="main-contact"
+    class="relative isolate grid min-h-screen w-full place-items-center
+    content-center bg-gray-600
     overflow-hidden px-4 py-12 sm:px-6 sm:py-20">
     <img
       :src="contactBackground"
