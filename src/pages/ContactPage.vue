@@ -7,20 +7,17 @@ import { onMounted } from 'vue';
 import { ref } from 'vue';
 import * as z from 'zod';
 
+type ContactData = z.infer<typeof SchemaFields>;
+
+interface FieldsKeys {
+  name: keyof ContactData;
+  label: string;
+  type: string;
+  autocomplete: string;
+}
 let motion: ReturnType<typeof gsap.matchMedia> | undefined;
 const contact = ref<HTMLElement | null>(null)
 
-const SchemaFields = z.object({
-  firstname: z.string().trim().min(1, 'Enter your first name'),
-  lastname: z.string().trim().min(1, 'Enter your last name'),
-  country: z.string().trim().min(1, 'Enter you country'),
-  city: z.string().trim().min(1, 'Enter your city'),
-  phone: z.e164({ error: 'Use an international number, e.g. +37251234567' }),
-  email: z.email({ error: 'Enter a valid email address' }),
-  message: z.string().trim().min(1, 'Enter a message'),
-});
-
-type ContactData = z.infer<typeof SchemaFields>;
 
 const user = ref({
   firstname: '',
@@ -32,21 +29,10 @@ const user = ref({
   message: '',
 });
 
-console.log(SchemaFields.safeParse(user));
-
-const fields = [
-  { name: 'firstname', label: 'First name', type: 'text', autocomplete: 'given-name' },
-  { name: 'lastname', label: 'Last name', type: 'text', autocomplete: 'family-name' },
-  { name: 'country', label: 'Country', type: 'text', autocomplete: 'country-name' },
-  { name: 'city', label: 'City', type: 'text', autocomplete: 'address-level' },
-  { name: 'phone', label: 'Phone number', type: 'tel', autocomplete: 'tel' },
-  { name: 'email', label: 'Email', type: 'email', autocomplete: 'email' },
-] satisfies Array <{
-    name: keyof ContactData;
-    label: string;
-    type: string;
-    autocomplete: string;
-  }>;
+function handleSubmit() {
+  const result = SchemaFields.safeParse(user)
+  return result;
+}
 
 function animateForm() {
   gsap
@@ -61,7 +47,27 @@ function animateForm() {
     )
 }
 
+const fields: FieldsKeys[] = [
+  { name: 'firstname', label: 'First name', type: 'text', autocomplete: 'given-name' },
+  { name: 'lastname', label: 'Last name', type: 'text', autocomplete: 'family-name' },
+  { name: 'country', label: 'Country', type: 'text', autocomplete: 'country-name' },
+  { name: 'city', label: 'City', type: 'text', autocomplete: 'address-level' },
+  { name: 'phone', label: 'Phone number', type: 'tel', autocomplete: 'tel' },
+  { name: 'email', label: 'Email', type: 'email', autocomplete: 'email' },
+]
+
+const SchemaFields = z.object({
+  firstname: z.string().trim().min(1, 'Enter your first name'),
+  lastname: z.string().trim().min(1, 'Enter your last name'),
+  country: z.string().trim().min(1, 'Enter you country'),
+  city: z.string().trim().min(1, 'Enter your city'),
+  phone: z.e164({ error: 'Use an international number, e.g. +37251234567' }),
+  email: z.email({ error: 'Enter a valid email address' }),
+  message: z.string().trim().min(1, 'Enter a message'),
+});
+
 const message = { name: 'message', label: 'Message', type: 'text', autocomplete: 'message' }
+const errors = ref<Partial<Record<keyof ContactData, string>>>({});
 
 console.log(`There is some ${message} waiting for you.`);
 
@@ -93,7 +99,8 @@ onMounted(() => {
         from-[#9f72d4] to-[#e3905d] bg-clip-text text-transparent">Contact</h1>
 
       <!-- Submission is intentionally disabled until a contact endpoint is available. -->
-      <form class="items-center grid min-w-0 grid-cols-1 sm:grid-cols-2 gap-5 w-full" @submit.prevent>
+      <form class="items-center grid min-w-0 grid-cols-1 sm:grid-cols-2 gap-5 w-full"
+        @submit.prevent="handleSubmit">
         <div
           v-for="field in fields"
           :key="field.name"
