@@ -15,6 +15,7 @@ interface FieldsKeys {
   type: string;
   autocomplete: string;
 }
+
 let motion: ReturnType<typeof gsap.matchMedia> | undefined;
 const contact = ref<HTMLElement | null>(null)
 
@@ -30,8 +31,15 @@ const user = ref({
 });
 
 function handleSubmit() {
-  const result = SchemaFields.safeParse(user)
-  return result;
+  return SchemaFields.safeParse(user)
+}
+
+function validateField(name: keyof ContactData) {
+  const result = SchemaFields.shape[name].safeParse(user.value[name]);
+  if (!result.success) {
+    errors.value[name] = result.error.issues[0]?.message
+    console.log(errors.value);
+  }
 }
 
 function animateForm() {
@@ -68,8 +76,6 @@ const SchemaFields = z.object({
 
 const message = { name: 'message', label: 'Message', type: 'text', autocomplete: 'message' }
 const errors = ref<Partial<Record<keyof ContactData, string>>>({});
-
-console.log(`There is some ${message} waiting for you.`);
 
 onMounted(() => {
   gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
@@ -119,6 +125,7 @@ onMounted(() => {
             :autocomplete="field.autocomplete"
             class="w-full rounded-lg border border-gray-300 bg-white px-3 py-3 text-base text-gray-700
             focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-500 items-center"
+            @blur="validateField(field.name)"
           />
           <p v-if="errors[field.name]" class="text-sm text-red-600">
             {{ errors[field.name] }}
@@ -130,7 +137,7 @@ onMounted(() => {
         class="min-w-0 w-full resize-y rounded-lg border border-gray-300 bg-white px-3 py-3 text-base text-gray-700
         focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-500"
       />
-        <button type="submit" class="w-full bg-linear-to-r from-[#9f72d4] to-[#e3905d]
+        <button @click="validateField('message')" type="submit" class="w-full bg-linear-to-r from-[#9f72d4] to-[#e3905d]
             py-5 mt-10 rounded-lg cursor-pointer text-white hover:-translate-y-1 transition-transform duration-200">Send</button>
       </div>
       </form>
