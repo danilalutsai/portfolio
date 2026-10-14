@@ -10,30 +10,43 @@ import * as z from 'zod';
 let motion: ReturnType<typeof gsap.matchMedia> | undefined;
 const contact = ref<HTMLElement | null>(null)
 
-const fields = ref([
-  { name: 'firstName', label: 'First name', type: 'text', autocomplete: 'given-name' },
-  { name: 'lastName', label: 'Last name', type: 'text', autocomplete: 'family-name' },
-  { name: 'country', label: 'Country', type: 'text', autocomplete: 'country-name' },
-  { name: 'city', label: 'City', type: 'text', autocomplete: 'address-level2' },
-  { name: 'phone', label: 'Phone number', type: 'tel', autocomplete: 'tel' },
-  { name: 'email', label: 'Email', type: 'email', autocomplete: 'email' },
-  { name: 'contact', label: 'Contact', type: 'contact', autocomplete: 'contact' },
-])
+const SchemaFields = z.object({
+  firstname: z.string().trim().min(1, 'Enter your first name'),
+  lastname: z.string().trim().min(1, 'Enter your last name'),
+  country: z.string().trim().min(1, 'Enter you country'),
+  city: z.string().trim().min(1, 'Enter your city'),
+  phone: z.e164({ error: 'Use an international number, e.g. +37251234567' }),
+  email: z.email({ error: 'Enter a valid email address' }),
+  message: z.string().trim().min(1, 'Enter a message'),
+});
 
-const formData = ref({
-  firstName: '',
-  lastName: '',
+type ContactData = z.infer<typeof SchemaFields>;
+
+const user = ref({
+  firstname: '',
+  lastname: '',
   country: '',
   city: '',
-  phoneNumber: '',
+  phone: '',
   email: '',
   message: '',
 });
 
-const emailSchema = z.email();
+console.log(SchemaFields.safeParse(user));
 
-const colors = z.literal(['red', 'green', 'blue' ]);
-console.log(colors);
+const fields = [
+  { name: 'firstname', label: 'First name', type: 'text', autocomplete: 'given-name' },
+  { name: 'lastname', label: 'Last name', type: 'text', autocomplete: 'family-name' },
+  { name: 'country', label: 'Country', type: 'text', autocomplete: 'country-name' },
+  { name: 'city', label: 'City', type: 'text', autocomplete: 'address-level' },
+  { name: 'phone', label: 'Phone number', type: 'tel', autocomplete: 'tel' },
+  { name: 'email', label: 'Email', type: 'email', autocomplete: 'email' },
+] satisfies Array <{
+    name: keyof ContactData;
+    label: string;
+    type: string;
+    autocomplete: string;
+  }>;
 
 function animateForm() {
   gsap
@@ -48,14 +61,7 @@ function animateForm() {
     )
 }
 
-console.log(fields);
-
-const message = {
-  name: 'message',
-  label: 'Message',
-  type: 'text',
-  autocomplete: 'message',
-}
+const message = { name: 'message', label: 'Message', type: 'text', autocomplete: 'message' }
 
 console.log(`There is some ${message} waiting for you.`);
 
@@ -81,7 +87,7 @@ onMounted(() => {
       class="absolute inset-0 -z-10 h-full w-full object-cover"
     />
 
-    <div class="geid min-w-0 w-full max-w-5xl grid-cols-1 gap-8 rounded-2xl bg-white/95
+    <div class="grid min-w-0 w-full max-w-5xl grid-cols-1 gap-8 rounded-2xl bg-white/95
       px-4 py-10 sm:px-10 sm:py-20 shadow-xl">
       <h1 class="text-3xl font-semibold  sm:text-4xl pb-10 bg-linear-180
         from-[#9f72d4] to-[#e3905d] bg-clip-text text-transparent">Contact</h1>
@@ -99,6 +105,7 @@ onMounted(() => {
           >{{ field.label }}</label>
 
           <input
+            v-model="user[field.name]"
             :id="field.name"
             :name="field.name"
             :type="field.type"
@@ -106,6 +113,9 @@ onMounted(() => {
             class="w-full rounded-lg border border-gray-300 bg-white px-3 py-3 text-base text-gray-700
             focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-500 items-center"
           />
+          <p v-if="errors[field.name]" class="text-sm text-red-600">
+            {{ errors[field.name] }}
+          </p>
         </div>
       <div class="col-span-full grid min-w-0 gap-2">
       <label :for="message.name" class="text-lg font-normal text-gray-600">Message</label>
