@@ -32,16 +32,25 @@ const user = ref({
 });
 
 function handleSubmit() {
-  return SchemaFields.safeParse(user);
+  const result = SchemaFields.safeParse(user.value);
+
+  if (!result.success) {
+    for (const field of fields) {
+      validateField(field.name);
+    }
+    return;
+  }
+  errors.value = {};
+  console.log(result.data);
 }
 
 function validateField(name: keyof ContactData) {
   const result = SchemaFields.shape[name].safeParse(user.value[name]);
 
-  if (result.success) {
-    delete errors.value[name];
-  } else {
+  if (!result.success) {
     errors.value[name] = result.error.issues[0]?.message;
+  } else {
+    delete errors.value[name];
   }
 }
 
@@ -65,6 +74,8 @@ const SchemaFields = z.object({
   message: z.string().trim().min(5, 'Enter a message. Min 5 chars.'),
 });
 
+const errors = ref<Partial<Record<keyof ContactData, string>>>({});
+
 for (const field of fields) {
   watch(
     () => user.value[field.name],
@@ -72,14 +83,14 @@ for (const field of fields) {
   );
 }
 
-const errors = ref<Partial<Record<keyof ContactData, string>>>({});
-
 onMounted(() => {
   gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
   motion = gsap.matchMedia()
 
   const contactElement = contact.value
 });
+
+console.log(user.value);
 
 </script>
 
@@ -135,8 +146,6 @@ onMounted(() => {
             class="w-full rounded-lg border border-gray-300 bg-white px-3 py-3 text-base text-gray-700
             focus-visible:outline-2 focus-visible:outline-offset-2
             focus-visible:outline-green-500 items-center"
-            @blur="validateField(field.name)"
-            @input="errors[field.name] && validateField(field.name)"
           />
           <div class="min-h-5">
             <p v-if="errors[field.name]" class="text-sm text-red-600">
@@ -144,7 +153,7 @@ onMounted(() => {
             </p>
           </div>
         </div>
-        <button @click="validateField('message')" type="submit" class="w-full bg-linear-to-r from-[#9f72d4] to-[#e3905d] col-span-full grid min-w-0 gap-2
+        <button @click="handleSubmit" type="submit" class="w-full bg-linear-to-r from-[#9f72d4] to-[#e3905d] col-span-full grid min-w-0 gap-2
           py-5 mt-10 rounded-lg cursor-pointer text-white hover:-translate-y-1 transition-transform duration-200">Send</button>
       </form>
     </div>
