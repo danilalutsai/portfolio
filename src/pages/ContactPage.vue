@@ -7,6 +7,8 @@ import { onMounted } from 'vue';
 import { ref } from 'vue';
 import * as z from 'zod';
 
+console.log(z.promise(z.string()).parseAsync(Promise.resolve("sdf")));
+
 type ContactData = z.infer<typeof SchemaFields>;
 
 interface FieldsKeys {
@@ -18,7 +20,6 @@ interface FieldsKeys {
 
 let motion: ReturnType<typeof gsap.matchMedia> | undefined;
 const contact = ref<HTMLElement | null>(null)
-
 
 const user = ref({
   firstname: '',
@@ -62,6 +63,7 @@ const fields: FieldsKeys[] = [
   { name: 'city', label: 'City', type: 'text', autocomplete: 'address-level' },
   { name: 'phone', label: 'Phone number', type: 'tel', autocomplete: 'tel' },
   { name: 'email', label: 'Email', type: 'email', autocomplete: 'email' },
+  { name: 'message', label: 'Message', type: 'message', autocomplete: 'message' },
 ]
 
 const SchemaFields = z.object({
@@ -74,7 +76,7 @@ const SchemaFields = z.object({
   message: z.string().trim().min(1, 'Enter a message'),
 });
 
-const message = { name: 'message', label: 'Message', type: 'text', autocomplete: 'message' }
+const message = { name: 'message', label: 'Message', type: 'text', autocomplete: 'message' };
 const errors = ref<Partial<Record<keyof ContactData, string>>>({});
 
 onMounted(() => {
@@ -101,16 +103,18 @@ onMounted(() => {
 
     <div class="grid min-w-0 w-full max-w-5xl grid-cols-1 gap-8 rounded-2xl bg-white/95
       px-4 py-10 sm:px-10 sm:py-20 shadow-xl">
-      <h1 class="text-3xl font-semibold  sm:text-4xl pb-10 bg-linear-180
+      <h1 class="text-3xl font-semibold sm:text-4xl pb-10 bg-linear-180
         from-[#9f72d4] to-[#e3905d] bg-clip-text text-transparent">Contact</h1>
 
       <!-- Submission is intentionally disabled until a contact endpoint is available. -->
       <form class="items-center grid min-w-0 grid-cols-1 sm:grid-cols-2 gap-5 w-full"
         @submit.prevent="handleSubmit">
-        <div
+        <component
+          :is="field.name === 'message' ? 'textarea' : 'div'"
           v-for="field in fields"
           :key="field.name"
           class="grid min-w-0 gap-2"
+          :class="{ 'col-span-2 min-h-40 resize-y rounded-lg p-4': field.name === 'message' }"
         >
           <label
             :for="field.name"
@@ -130,7 +134,7 @@ onMounted(() => {
           <p v-if="errors[field.name]" class="text-sm text-red-600">
             {{ errors[field.name] }}
           </p>
-        </div>
+        </component>
       <div class="col-span-full grid min-w-0 gap-2">
       <label :for="message.name" class="text-lg font-normal text-gray-600">Message</label>
       <textarea id="message" name="message" rows="5"
