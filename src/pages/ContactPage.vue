@@ -4,7 +4,7 @@ import { gsap } from 'gsap';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { onMounted } from 'vue';
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import * as z from 'zod';
 
 console.log(z.promise(z.string()).parseAsync(Promise.resolve("sdf")));
@@ -32,28 +32,17 @@ const user = ref({
 });
 
 function handleSubmit() {
-  return SchemaFields.safeParse(user)
+  return SchemaFields.safeParse(user);
 }
 
 function validateField(name: keyof ContactData) {
   const result = SchemaFields.shape[name].safeParse(user.value[name]);
-  if (!result.success) {
-    errors.value[name] = result.error.issues[0]?.message
-    console.log(errors.value);
-  }
-}
 
-function animateForm() {
-  gsap
-    .timeline()
-    .from(
-      '[data-animate="main-contact"]',
-      {
-        opacity: 0,
-        duration: 1,
-        y: 20,
-      },
-    )
+  if (result.success) {
+    delete errors.value[name];
+  } else {
+    errors.value[name] = result.error.issues[0]?.message;
+  }
 }
 
 const fields: FieldsKeys[] = [
@@ -67,16 +56,22 @@ const fields: FieldsKeys[] = [
 ]
 
 const SchemaFields = z.object({
-  firstname: z.string().trim().min(1, 'Enter your first name'),
-  lastname: z.string().trim().min(1, 'Enter your last name'),
-  country: z.string().trim().min(1, 'Enter you country'),
-  city: z.string().trim().min(1, 'Enter your city'),
+  firstname: z.string().trim().min(2, 'Enter your first name. Min 2 char.'),
+  lastname: z.string().trim().min(2, 'Enter your last name. Min 2 char.'),
+  country: z.string().trim().min(2, 'Enter you country. Min 2 char.'),
+  city: z.string().trim().min(2, 'Enter your city. Min 2 char.'),
   phone: z.e164({ error: 'Use an international number, e.g. +37251234567' }),
-  email: z.email({ error: 'Enter a valid email address' }),
-  message: z.string().trim().min(1, 'Enter a message'),
+  email: z.email({ error: 'Enter a valid email address with @' }),
+  message: z.string().trim().min(5, 'Enter a message. Min 5 char.'),
 });
 
-const message = { name: 'message', label: 'Message', type: 'text', autocomplete: 'message' };
+for (const field of fields) {
+  watch(
+    () => user.value[field.name],
+    () => validateField(field.name),
+  );
+}
+
 const errors = ref<Partial<Record<keyof ContactData, string>>>({});
 
 onMounted(() => {
@@ -109,41 +104,48 @@ onMounted(() => {
       <!-- Submission is intentionally disabled until a contact endpoint is available. -->
       <form class="items-center grid min-w-0 grid-cols-1 sm:grid-cols-2 gap-5 w-full"
         @submit.prevent="handleSubmit">
-        <component
-          :is="field.name === 'message' ? 'textarea' : 'div'"
+        <div
           v-for="field in fields"
           :key="field.name"
           class="grid min-w-0 gap-2"
-          :class="{ 'col-span-2 min-h-40 resize-y rounded-lg p-4': field.name === 'message' }"
+          :class="{ 'sm:col-span-2': field.name === 'message' }"
         >
           <label
             :for="field.name"
             class="text-lg font-normal text-gray-600"
           >{{ field.label }}</label>
 
+          <textarea
+            v-if="field.name === 'message'"
+            v-model="user[field.name]"
+            :id="field.name"
+            :name="field.name"
+            class="min-h-40 w-full rounded-lg border border-gray-300 p-4"
+            @blur="validateField(field.name)"
+            @focus="validateField(field.name)"
+          />
+
           <input
+            v-if="field.name !== 'message'"
             v-model="user[field.name]"
             :id="field.name"
             :name="field.name"
             :type="field.type"
             :autocomplete="field.autocomplete"
             class="w-full rounded-lg border border-gray-300 bg-white px-3 py-3 text-base text-gray-700
-            focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-500 items-center"
+            focus-visible:outline-2 focus-visible:outline-offset-2
+            focus-visible:outline-green-500 items-center"
             @blur="validateField(field.name)"
+            @input="errors[field.name] && validateField(field.name)"
           />
-          <p v-if="errors[field.name]" class="text-sm text-red-600">
-            {{ errors[field.name] }}
-          </p>
-        </component>
-      <div class="col-span-full grid min-w-0 gap-2">
-      <label :for="message.name" class="text-lg font-normal text-gray-600">Message</label>
-      <textarea id="message" name="message" rows="5"
-        class="min-w-0 w-full resize-y rounded-lg border border-gray-300 bg-white px-3 py-3 text-base text-gray-700
-        focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-500"
-      />
-        <button @click="validateField('message')" type="submit" class="w-full bg-linear-to-r from-[#9f72d4] to-[#e3905d]
-            py-5 mt-10 rounded-lg cursor-pointer text-white hover:-translate-y-1 transition-transform duration-200">Send</button>
-      </div>
+          <div class="min-h-5">
+            <p v-if="errors[field.name]" class="text-sm text-red-600">
+              {{ errors[field.name] }}
+            </p>
+          </div>
+        </div>
+        <button @click="validateField('message')" type="submit" class="w-full bg-linear-to-r from-[#9f72d4] to-[#e3905d] col-span-full grid min-w-0 gap-2
+          py-5 mt-10 rounded-lg cursor-pointer text-white hover:-translate-y-1 transition-transform duration-200">Send</button>
       </form>
     </div>
   </section>
