@@ -56,13 +56,13 @@ const fields: FieldsKeys[] = [
 ]
 
 const SchemaFields = z.object({
-  firstname: z.string().trim().min(2, 'Enter your first name. Min 2 char.'),
-  lastname: z.string().trim().min(2, 'Enter your last name. Min 2 char.'),
-  country: z.string().trim().min(2, 'Enter you country. Min 2 char.'),
-  city: z.string().trim().min(2, 'Enter your city. Min 2 char.'),
+  firstname: z.string().trim().min(2, 'Enter your first name. Min 2 chars.'),
+  lastname: z.string().trim().min(2, 'Enter your last name. Min 2 chars.'),
+  country: z.string().trim().min(2, 'Enter you country. Min 2 chars.'),
+  city: z.string().trim().min(2, 'Enter your city. Min 2 chars.'),
   phone: z.e164({ error: 'Use an international number, e.g. +37251234567' }),
   email: z.email({ error: 'Enter a valid email address with @' }),
-  message: z.string().trim().min(5, 'Enter a message. Min 5 char.'),
+  message: z.string().trim().min(5, 'Enter a message. Min 5 chars.'),
 });
 
 for (const field of fields) {
