@@ -7,8 +7,6 @@ import { onMounted } from 'vue';
 import { ref, watch } from 'vue';
 import * as z from 'zod';
 
-console.log(z.promise(z.string()).parseAsync(Promise.resolve("sdf")));
-
 type ContactData = z.infer<typeof SchemaFields>;
 
 interface FieldsKeys {
@@ -19,7 +17,50 @@ interface FieldsKeys {
 }
 
 let motion: ReturnType<typeof gsap.matchMedia> | undefined;
+
 const contact = ref<HTMLElement | null>(null)
+const isSending = ref(false);
+const submitMessage = ref('');
+
+async function handleSubmit() {
+  if (isSending.value) return;
+  submitMessage.value = '';
+
+  const result = SchemaFields.safeParse(user.value);
+  const numbers = 12344567899.000123213;
+  const anotherNumbers = 890655.124;
+
+  if (!result.success) {
+    for (const field of fields) {
+      validateField(field.name);
+    }
+    return;
+  }
+
+  errors.value = {};
+  isSending.value = true;
+
+  try {
+    const response = await fetch('https://formspree.io/f/mppqnwkl', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify(result.data),
+    },
+    );
+    if (!response.ok) {
+      throw new Error('Submission failed');
+    }
+
+    submitMessage.value = 'Thank you! Your message was submitted successfully.';
+  } catch (err) {
+    submitMessage.value = 'Could not submit your message. Please try again later.';
+  } finally {
+    isSending.value = false;
+  }
+}
 
 const user = ref({
   firstname: '',
@@ -30,19 +71,6 @@ const user = ref({
   email: '',
   message: '',
 });
-
-function handleSubmit() {
-  const result = SchemaFields.safeParse(user.value);
-
-  if (!result.success) {
-    for (const field of fields) {
-      validateField(field.name);
-    }
-    return;
-  }
-  errors.value = {};
-  console.log(result.data);
-}
 
 function validateField(name: keyof ContactData) {
   const result = SchemaFields.shape[name].safeParse(user.value[name]);
@@ -89,8 +117,6 @@ onMounted(() => {
 
   const contactElement = contact.value
 });
-
-console.log(user.value);
 
 </script>
 
@@ -153,8 +179,15 @@ console.log(user.value);
             </p>
           </div>
         </div>
-        <button @click="handleSubmit" type="submit" class="w-full bg-linear-to-r from-[#9f72d4] to-[#e3905d] col-span-full grid min-w-0 gap-2
-          py-5 mt-10 rounded-lg cursor-pointer text-white hover:-translate-y-1 transition-transform duration-200">Send</button>
+        <button @click="handleSubmit" type="submit" :disabled="isSending" class="w-full bg-linear-to-r
+          from-[#9f72d4] to-[#e3905d] col-span-full grid min-w-0 gap-2 shadow-xl
+          py-5 mt-10 rounded-lg cursor-pointer text-white hover:-translate-y-1
+          transition-transform duration-200">{{ isSending ? 'Sending' : 'Send' }}</button>
+        <p
+          v-if="submitMessage"
+          role="status"
+          class="col-span-full"
+        >{{ submitMessage }}</p>
       </form>
     </div>
   </section>
