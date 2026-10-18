@@ -4,7 +4,7 @@ import { gsap } from 'gsap';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { onMounted } from 'vue';
-import { ref, watch } from 'vue';
+import { ref, watch, nextTick } from 'vue';
 import * as z from 'zod';
 
 type ContactData = z.infer<typeof SchemaFields>;
@@ -27,8 +27,6 @@ async function handleSubmit() {
   submitMessage.value = '';
 
   const result = SchemaFields.safeParse(user.value);
-  const numbers = 12344567899.000123213;
-  const anotherNumbers = 890655.124;
 
   if (!result.success) {
     for (const field of fields) {
@@ -50,13 +48,27 @@ async function handleSubmit() {
       body: JSON.stringify(result.data),
     },
     );
+
     if (!response.ok) {
       throw new Error('Submission failed');
     }
 
+    user.value = {
+      firstname: '',
+      lastname: '',
+      country: '',
+      city: '',
+      phone: '',
+      email: '',
+      message: '',
+    };
+
+    await nextTick();
+    errors.value = {};
+
     submitMessage.value = 'Thank you! Your message was submitted successfully.';
-  } catch (err) {
-    submitMessage.value = 'Could not submit your message. Please try again later.';
+  } catch {
+    submitMessage.value = `Could not submit your message. Please try again later. ${err.message}`;
   } finally {
     isSending.value = false;
   }
@@ -83,13 +95,48 @@ function validateField(name: keyof ContactData) {
 }
 
 const fields: FieldsKeys[] = [
-  { name: 'firstname', label: 'First name', type: 'text', autocomplete: 'given-name' },
-  { name: 'lastname', label: 'Last name', type: 'text', autocomplete: 'family-name' },
-  { name: 'country', label: 'Country', type: 'text', autocomplete: 'country-name' },
-  { name: 'city', label: 'City', type: 'text', autocomplete: 'address-level' },
-  { name: 'phone', label: 'Phone number', type: 'tel', autocomplete: 'tel' },
-  { name: 'email', label: 'Email', type: 'email', autocomplete: 'email' },
-  { name: 'message', label: 'Message', type: 'message', autocomplete: 'message' },
+  {
+    name: 'firstname',
+    label: 'First name',
+    type: 'text',
+    autocomplete: 'given-name',
+  },
+  {
+    name: 'lastname',
+    label: 'Last name',
+    type: 'text',
+    autocomplete: 'family-name',
+  },
+  {
+    name: 'country',
+    label: 'Country',
+    type: 'text',
+    autocomplete: 'country-name',
+  },
+  {
+    name: 'city',
+    label: 'City',
+    type: 'text',
+    autocomplete: 'address-level',
+  },
+  {
+    name: 'phone',
+    label: 'Phone number',
+    type: 'tel',
+    autocomplete: 'tel',
+  },
+  {
+    name: 'email',
+    label: 'Email',
+    type: 'email',
+    autocomplete: 'email',
+  },
+  {
+    name: 'message',
+    label: 'Message',
+    type: 'message',
+    autocomplete: 'message',
+  },
 ]
 
 const SchemaFields = z.object({
@@ -179,10 +226,10 @@ onMounted(() => {
             </p>
           </div>
         </div>
-        <button @click="handleSubmit" type="submit" :disabled="isSending" class="w-full bg-linear-to-r
+        <button type="submit" :disabled="isSending" class="w-full bg-linear-to-r
           from-[#9f72d4] to-[#e3905d] col-span-full grid min-w-0 gap-2 shadow-xl
           py-5 mt-10 rounded-lg cursor-pointer text-white hover:-translate-y-1
-          transition-transform duration-200">{{ isSending ? 'Sending' : 'Send' }}</button>
+          transition-transform duration-200 active:-translate-y-2">{{ isSending ? 'Sending...' : 'Send' }}</button>
         <p
           v-if="submitMessage"
           role="status"
