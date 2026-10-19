@@ -7,6 +7,7 @@ import { onMounted } from 'vue';
 import { ref, watch, nextTick } from 'vue';
 import * as z from 'zod';
 
+
 type ContactData = z.infer<typeof SchemaFields>;
 
 interface FieldsKeys {
@@ -37,6 +38,7 @@ async function handleSubmit() {
 
   errors.value = {};
   isSending.value = true;
+  submitMessage.value = 'Loading...';
 
   try {
     const response = await fetch('https://formspree.io/f/mppqnwkl', {
@@ -68,7 +70,7 @@ async function handleSubmit() {
 
     submitMessage.value = 'Thank you! Your message was submitted successfully.';
   } catch {
-    submitMessage.value = `Could not submit your message. Please try again later. ${err.message}`;
+    submitMessage.value = `Could not submit your message. Please try again later.`;
   } finally {
     isSending.value = false;
   }
@@ -95,48 +97,13 @@ function validateField(name: keyof ContactData) {
 }
 
 const fields: FieldsKeys[] = [
-  {
-    name: 'firstname',
-    label: 'First name',
-    type: 'text',
-    autocomplete: 'given-name',
-  },
-  {
-    name: 'lastname',
-    label: 'Last name',
-    type: 'text',
-    autocomplete: 'family-name',
-  },
-  {
-    name: 'country',
-    label: 'Country',
-    type: 'text',
-    autocomplete: 'country-name',
-  },
-  {
-    name: 'city',
-    label: 'City',
-    type: 'text',
-    autocomplete: 'address-level',
-  },
-  {
-    name: 'phone',
-    label: 'Phone number',
-    type: 'tel',
-    autocomplete: 'tel',
-  },
-  {
-    name: 'email',
-    label: 'Email',
-    type: 'email',
-    autocomplete: 'email',
-  },
-  {
-    name: 'message',
-    label: 'Message',
-    type: 'message',
-    autocomplete: 'message',
-  },
+  { name: 'firstname', label: 'First name', type: 'text', autocomplete: 'given-name' },
+  { name: 'lastname', label: 'Last name', type: 'text', autocomplete: 'family-name' },
+  { name: 'country', label: 'Country', type: 'text', autocomplete: 'country-name' },
+  { name: 'city', label: 'City', type: 'text', autocomplete: 'address-level' },
+  { name: 'phone', label: 'Phone number', type: 'tel', autocomplete: 'tel' },
+  { name: 'email', label: 'Email', type: 'email', autocomplete: 'email' },
+  { name: 'message', label: 'Message', type: 'message', autocomplete: 'message' },
 ]
 
 const SchemaFields = z.object({
@@ -159,10 +126,13 @@ for (const field of fields) {
 }
 
 onMounted(() => {
-  gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
-  motion = gsap.matchMedia()
-
-  const contactElement = contact.value
+  const timeline = gsap.timeline();
+  timeline
+    .from('section', {
+      duration: 1,
+      ease: 'power1',
+      opacity: 0,
+    })
 });
 
 </script>
@@ -171,9 +141,10 @@ onMounted(() => {
   <section
     ref="contact"
     data-animate="main-contact"
-    class="relative isolate grid min-h-screen w-full place-items-center
+    class="main-section relative isolate grid min-h-screen w-full place-items-center
     content-center bg-gray-600
-    overflow-hidden px-4 py-12 sm:px-6 sm:py-20">
+    overflow-hidden px-4 py-12 sm:px-6 sm:py-20"
+  >
     <img
       :src="contactBackground"
       alt=""
@@ -204,11 +175,10 @@ onMounted(() => {
             v-model="user[field.name]"
             :id="field.name"
             :name="field.name"
-            class="min-h-40 w-full rounded-lg border border-gray-300 p-4"
+              class="min-h-40 w-full rounded-lg border border-gray-300 p-4"
             @blur="validateField(field.name)"
             @focus="validateField(field.name)"
           />
-
 
           <input
             v-if="field.name !== 'message'"
@@ -230,7 +200,9 @@ onMounted(() => {
         <button type="submit" :disabled="isSending" class="w-full bg-linear-to-r
           from-[#9f72d4] to-[#e3905d] col-span-full grid min-w-0 gap-2 shadow-xl
           py-5 mt-10 rounded-lg cursor-pointer text-white hover:-translate-y-1
-          transition-transform duration-200 active:-translate-y-2">{{ isSending ? 'Sending...' : 'Send' }}</button>
+          transition-transform duration-200 active:-translate-y-2">
+          {{ isSending ? 'Sending...' : 'Send' }}
+        </button>
         <p
           v-if="submitMessage"
           role="status"
