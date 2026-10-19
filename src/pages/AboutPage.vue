@@ -22,32 +22,40 @@ onMounted(() => {
     Not early in the life.
   </h1>
 
-  <div id="main-section" class="mx-auto grid w-full grid-cols-1 sm:items-center sm:grid-cols-2 max-w-300 px-6 font-sans text-lg text-gray-500 gap-5 font-normal">
+  <div id="main-section" class="mx-auto w-full grid grid-cols-1 items-center sm:grid-cols-2 max-w-300 px-6 font-sans text-lg text-gray-500 gap-5 font-normal place-items-center">
 
     <!-- Pair 1, Text left, image right -->
-    <div>Hello everyone. My name is Danila Lutsai, I'm 28, and I build things for the web.</div>
+    <div class="max-w-125">
+      Hello everyone. My name is Danila Lutsai, I'm 28, and I build things for the web.
+      This site is my portfolio — a small, honest place to put my work, my thinking, and a bit
+      of who I am outside the code. Nothing exhaustive, nothing inflated. Just a starting point.
+    </div>
     <div>
       <img
         src="@/assets/img/avatar-01.png"
         alt="Danila Lutsai"
-        class="block h-auto w-full rounded-full shadow-photo"
+        class="block h-auto max-w-100 rounded-full shadow-photo"
       >
     </div>
 
     <!-- Pair 2, Text right, image left -->
-    <div class="sm:col-start-2 sm:row-start-2">
-      This site is my portfolio — a small, honest place to put my work, my thinking, and a bit
-      of who I am outside the code. Nothing exhaustive, nothing inflated. Just a starting point.
+    <div class="sm:col-start-2 sm:row-start-2 max-w-125">
+      I came to frontend development the long way around, and I think that's an advantage. Being
+      twenty-eight means I've already learned how to learn — how to sit with something confusing
+      until it stops being confusing, how to ask better questions, and how to tell the
+      difference between knowing a thing and only recognizing it. I'm early in this career, not
+      early in my life, and those are very different starting lines.
     </div>
+
     <div class="relative">
       <img
-        src="@/assets/img/avatar-01.png"
+        src="@/assets/img/about-focused-2.png"
         alt="Danila Lutsai"
-        class="block h-auto w-full shadow-photo rounded-full"
+        class="block h-auto w-100 shadow-photo rounded-full max-w-100 aspect-square"
       />
     </div>
 
-
+    <!-- Pair 3, Text left, image right -->
 
     <div>
       I came to frontend development the long way around, and I think that's an advantage. Being
