@@ -47,6 +47,7 @@ onMounted(() => {
       duration: 0.5,
     });
 });
+
 //   .from(".img-pair-3", {
 //     scrollTrigger: ".img-pair-3",
 //     opacity: 0,

@@ -121,8 +121,6 @@ watch(
 );
 }
 
-onMounted(() => {
-});
 
 </script>
 
