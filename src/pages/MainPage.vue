@@ -301,6 +301,7 @@ onUnmounted(() => {
 </script>
 
 <template>
+  <div>
   <section ref="hero" class="relative flex min-h-screen w-full items-center
     justify-center overflow-hidden">
     <img
@@ -578,4 +579,5 @@ onUnmounted(() => {
       </div>
     </div>
   </section>
+  </div>
 </template>
