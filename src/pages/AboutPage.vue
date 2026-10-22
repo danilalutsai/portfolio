@@ -7,54 +7,63 @@ let context: ReturnType<typeof gsap.context>;
 
 gsap.registerPlugin(ScrollTrigger);
 
-gsap.from(".about-title", {
-  opacity: 0,
-  y: -100,
-  duration: 0.5,
-})
-
 onMounted(() => {
-  const timeline = gsap.timeline();
-  timeline
-  .from(".text-pair-1", {
-    scrollTrigger: ".text-pair-1",
+  gsap.from(".about-title", {
     opacity: 0,
-    x: -200,
+    y: -100,
     duration: 0.5,
-  })
-    .from(".text-pair-2", {
-      scrollTrigger: ".text-pair-2",
-      opacity: 0,
-      x: 200,
-      duration: 0.5,
-    })
+  });
 });
 
-onMounted(() => {
-  const timeline = gsap.timeline();
 
-  timeline
-    .from(".img-pair-1", {
-      scrollTrigger: ".img-pair-1",
-      opacity: 0,
-      x: 200,
-      duration: 0.5,
-    })
-    .from(".img-pair-2", {
-      scrollTrigger: ".img-pair-2",
+onMounted(() => {
+  gsap.from(".text-pair-1", {
       opacity: 0,
       x: -200,
       duration: 0.5,
-    });
+    })
+    gsap.from(".img-pair-1", {
+      opacity: 0,
+      x: 200,
+      duration: 0.5,
+    })
 });
 
-//   .from(".img-pair-3", {
-//     scrollTrigger: ".img-pair-3",
-//     opacity: 0,
-//     x: 200,
-//     duration: 0.5,
-//   })
-// });
+onMounted(() => {
+  gsap.from(".img-pair-2", {
+    scrollTrigger: ".img-pair-2",
+    opacity: 0,
+    x: -200,
+    duration: 1,
+  })
+  gsap.from(".text-pair-2", {
+    scrollTrigger: ".text-pair-2",
+    opacity: 0,
+    x: 200,
+    duration: 1,
+  })
+});
+
+onMounted(() => {
+  gsap.from(".text-pair-3", {
+    scrollTrigger: {
+      trigger: ".text-pair-3",
+      start: "top 85%",
+    },
+    opacity: 0,
+    x: -200,
+    duration: 1,
+  })
+  gsap.from(".img-pair-3", {
+    scrollTrigger: {
+      trigger: ".text-pair-3",
+      start: "top 85%",
+      },
+    opacity: 0,
+    x: 200,
+    duration: 1,
+  })
+});
 
 </script>
 
@@ -97,7 +106,7 @@ onMounted(() => {
       </div>
 
       <!-- Pair 3, Text left, image right -->
-      <div class="sm:col-start-1 sm:row-start-3 max-w-125">
+      <div class="text-pair-3 sm:col-start-1 sm:row-start-3 max-w-125">
         I came to frontend development the long way around, and I think that's an advantage. Being
         twenty-eight means I've already learned how to learn — how to sit with something confusing
         until it stops being confusing, how to ask better questions, and how to tell the
