@@ -1,10 +1,29 @@
 <script setup lang="ts">
+import gsap from 'gsap'
+import { onMounted } from 'vue'
+
 import fundamentals from '@/assets/img/computer-fundamentals-transparent.svg'
 import css from '@/assets/img/css-transparent.svg'
 import html from '@/assets/img/html-transparent.svg'
 import javascript from '@/assets/img/javascript-transparent.svg'
 
-const technologies = [
+onMounted(() => {
+  gsap.from('.techs-title', {
+    opacity: 0,
+    y: -100,
+    duration: 0.5,
+  });
+});
+
+interface Techs {
+  title: string;
+  image: string;
+  description: string;
+  col?: number; // column in grid
+  row?: number; // row in grid
+}
+
+const techs: Techs[] = [
   {
     title: 'Fundamentals',
     image: fundamentals,
@@ -33,26 +52,27 @@ const technologies = [
 </script>
 
 <template>
-  <div class="flex w-full flex-col items-center gap-10">
-    <h1 class="mb-10 text-center text-4xl tracking-tighter">
-      <span class="text-green-500">T</span>echnologies
+  <div>
+    <h1 class="techs-title py-10 text-3xto-[#a6e3a1] font-semibold text-3xl sm:text-4xl pb-10 bg-linear-180 from-[#89b4fa] to-[#a6e3a1] bg-clip-text text-transparent text-center">
+      Technologies
     </h1>
 
-    <section
-      v-for="(technology, index) in technologies"
-      :key="technology.title"
-      class="flex flex-col gap-5 rounded-2xl p-5 shadow-md sm:items-center sm:justify-center"
-      :class="index % 2 === 1 ? 'sm:flex-row-reverse' : 'sm:flex-row'"
-    >
-      <div class="max-w-150">
-        <h2
-          class="mb-2 border-l-4 border-green-500 pl-2 text-xl font-bold tracking-tighter uppercase"
-        >
-          {{ technology.title }}
+  <div class="grid md:grid-cols-2 max-w-300 items-start mx-auto justify-items-center gap-10 m-10">
+    <div
+        v-for="(tech, index) in techs" :key="index"
+        class="group flex flex-col outline-4 outline-gray-200 rounded-2xl p-5 sm:p-5 md:p-10 shadow-[0_0_12px_rgba(0,0,0,0.06),0_12px_24px_-6px_rgba(0,0,0,0.12)]
+        max-w-150 hover:-translate-y-2 transition-all duration-200 hover:outline-4 hover:outline-green-500 min-h-170">
+        <h2 class="mb-4 border-l-8 rounded-b-2xl rounded-t-2xl border-gray-500 group-hover:border-green-500 text-gray-600 pl-4 text-2xl sm:text-3xl font-bold tracking-tighter uppercase">
+          {{ tech.title }}
         </h2>
-        <p>{{ technology.description }}</p>
-      </div>
-      <img :src="technology.image" alt="" loading="lazy" class="max-h-100 sm:max-h-80" />
-    </section>
+        <p class="font-sans text-lg text-gray-500">{{ tech.description }}</p>
+      <img
+          :src="tech.image"
+          alt=""
+          loading="lazy"
+          class="max-h-100 sm:max-h-80"
+        />
+    </div>
+  </div>
   </div>
 </template>
