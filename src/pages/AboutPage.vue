@@ -3,8 +3,6 @@ import { onMounted } from 'vue';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-let context: ReturnType<typeof gsap.context>;
-
 gsap.registerPlugin(ScrollTrigger);
 
 onMounted(() => {
@@ -15,18 +13,17 @@ onMounted(() => {
   });
 });
 
-
 onMounted(() => {
   gsap.from(".text-pair-1", {
-      opacity: 0,
-      x: -200,
-      duration: 0.5,
-    })
-    gsap.from(".img-pair-1", {
-      opacity: 0,
-      x: 200,
-      duration: 0.5,
-    })
+    opacity: 0,
+    x: -200,
+    duration: 0.5,
+  })
+  gsap.from(".img-pair-1", {
+    opacity: 0,
+    x: 200,
+    duration: 0.5,
+  });
 });
 
 onMounted(() => {
@@ -41,14 +38,14 @@ onMounted(() => {
     opacity: 0,
     x: 200,
     duration: 1,
-  })
+  });
 });
 
 onMounted(() => {
   gsap.from(".text-pair-3", {
     scrollTrigger: {
       trigger: ".text-pair-3",
-      start: "top 85%",
+      start: "top 75%",
     },
     opacity: 0,
     x: -200,
@@ -57,13 +54,35 @@ onMounted(() => {
   gsap.from(".img-pair-3", {
     scrollTrigger: {
       trigger: ".text-pair-3",
-      start: "top 85%",
-      },
+      start: "top 75%",
+    },
     opacity: 0,
     x: 200,
     duration: 1,
-  })
+  });
 });
+
+onMounted(() => {
+  gsap.from(".text-pair-4", {
+    duration: 1,
+    opacity: 0,
+    x: 200,
+    scrollTrigger: {
+      trigger: ".img-pair-4",
+      start: "top 75%",
+    },
+  });
+  gsap.from(".img-pair-4", {
+    duration: 1,
+    opacity: 0,
+    x: -200,
+    scrollTrigger: {
+      trigger: ".text-pair-4",
+      start: "top 75%",
+    },
+  });
+});
+
 
 </script>
 
@@ -81,9 +100,7 @@ onMounted(() => {
 
       <!-- Pair 1, Text left, image right -->
       <div class="text-pair-1 max-w-125">
-        Hello everyone. My name is Danila Lutsai, I'm 28, and I build things for the web.
-        This site is my portfolio — a small, honest place to put my work, my thinking, and a bit
-        of who I am outside the code. Nothing exhaustive, nothing inflated. Just a starting point.
+        Hello everyone. My name is Danila Lutsai, I'm 28, and I build things for the web. This site is my portfolio — a small, honest place to put my work, my thinking, and a bit of who I am outside the code. Nothing exhaustive, nothing inflated. Just a starting point.
       </div>
 
       <div>
@@ -93,11 +110,7 @@ onMounted(() => {
 
       <!-- Pair 2, Text right, image left -->
       <div class="text-pair-2 sm:col-start-2 sm:row-start-2 max-w-125">
-        I came to frontend development the long way around, and I think that's an advantage. Being
-        twenty-eight means I've already learned how to learn — how to sit with something confusing
-        until it stops being confusing, how to ask better questions, and how to tell the
-        difference between knowing a thing and only recognizing it. I'm early in this career, not
-        early in my life, and those are very different starting lines.
+        I came to frontend development the long way around, and I think that's an advantage. Being twenty-eight means I've already learned how to learn — how to sit with something confusing until it stops being confusing, how to ask better questions, and how to tell the difference between knowing a thing and only recognizing it. I'm early in this career, not early in my life, and those are very different starting lines.
       </div>
 
       <div class="relative">
@@ -124,7 +137,7 @@ onMounted(() => {
       </div>
 
       <!-- Pair 4, Text right, image left -->
-      <div class="mb-30 sm:col-start-2 sm:col-row-4 max-w-125">
+      <div class="text-pair-4 mb-30 sm:col-start-2 sm:col-row-4 max-w-125">
         Right now most of my time goes into Vue and TypeScript. I like TypeScript because it
         argues with me, and it's usually right. I like Vue because it keeps the distance between
         an idea and a working interface refreshingly short. I'm the kind of developer who would
@@ -132,7 +145,7 @@ onMounted(() => {
         first, much faster later.
       </div>
 
-      <div class="sm:col-start-1 sm:row-start-4 relative">
+      <div class="img-pair-4 sm:col-start-1 sm:row-start-4 relative">
         <img
           src="@/assets/img/main-02.png"
           alt="Mountain and me"
