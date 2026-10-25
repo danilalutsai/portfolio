@@ -142,7 +142,17 @@ function onClick(tech: Techs) {
     </div>
 
     <div class="techs-description max-w-200 text-lg text-gray-500 mt-10 sm:mt-0 p-10 sm:p-20 mx-auto">
-      {{ selectedTech?.description }}
+      <Transition
+        mode="out-in"
+        enter-active-class="transition-opacity duration-300"
+        leave-active-class="transition-opacity duration-300"
+        enter-from-class="opacity-0"
+        leave-to-class="opacity-0"
+      >
+        <p :key="selectedTech?.title">
+          {{ selectedTech?.description }}
+        </p>
+      </Transition>
     </div>
 
   </div>
