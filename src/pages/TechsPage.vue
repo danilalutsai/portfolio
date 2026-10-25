@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import gsap from 'gsap'
-import { onMounted } from 'vue'
+import gsap from 'gsap';
+import { onMounted, ref } from 'vue';
 
 import fundamentalsImage from '@/assets/img/TechsComputerScience.jpg';
 import cssImage from '@/assets/img/TechsCSS.jpg';
@@ -23,8 +23,6 @@ interface Techs {
   title: string;
   image: string;
   description: string;
-  col?: number; // column in grid
-  row?: number; // row in grid
 }
 
 const techs: Techs[] = [
@@ -32,25 +30,25 @@ const techs: Techs[] = [
     title: 'Fundamentals',
     image: fundamentalsImage,
     description:
-      "I don't claim to know everything, and I don't think anyone in this field does. What I do have is a habit of learning things properly, from the fundamentals up. When a new tool appears, I can usually see what problem it solves and where it fits. Frameworks change every few years. The basics stay the same.",
+    "I don't claim to know everything, and I don't think anyone in this field does. What I do have is a habit of learning things properly, from the fundamentals up. When a new tool appears, I can usually see what problem it solves and where it fits. Frameworks change every few years. The basics stay the same.",
   },
   {
     title: 'HTML',
     image: htmlImage,
     description:
-      "HTML is where I started, and it's still the layer I care about getting right. I write semantic, accessible markup — proper headings, landmarks, labels and alt text — rather than a wall of divs. Structure comes first, styling after. Done properly, the page already works before a single line of CSS or JavaScript runs.",
+    "HTML is where I started, and it's still the layer I care about getting right. I write semantic, accessible markup — proper headings, landmarks, labels and alt text — rather than a wall of divs. Structure comes first, styling after. Done properly, the page already works before a single line of CSS or JavaScript runs.",
   },
   {
     title: 'CSS',
     image: cssImage,
     description:
-      "I build layouts with Flexbox and Grid, and I design mobile-first — the small screen decides the structure, wider ones get more room. Custom properties keep colours and spacing consistent instead of scattered. I'd rather solve something with modern CSS than pull in a dependency for it.",
+    "I build layouts with Flexbox and Grid, and I design mobile-first — the small screen decides the structure, wider ones get more room. Custom properties keep colours and spacing consistent instead of scattered. I'd rather solve something with modern CSS than pull in a dependency for it.",
   },
   {
     title: 'JavaScript',
     image: javascriptImage,
     description:
-      "JavaScript is the language I work in daily. I'm comfortable with modern syntax, async code and promises, and the DOM underneath the frameworks. Knowing how the event loop and scope actually behave is what makes debugging possible when something breaks in a way the framework doesn't explain.",
+    "JavaScript is the language I work in daily. I'm comfortable with modern syntax, async code and promises, and the DOM underneath the frameworks. Knowing how the event loop and scope actually behave is what makes debugging possible when something breaks in a way the framework doesn't explain.",
   },
   {
     title: 'TypeScript',
@@ -65,14 +63,56 @@ const techs: Techs[] = [
   {
     title: 'TailwindCSS',
     image: tailwindImage,
-    description: 'qwwerty',
+    description: "Tailwind is how I style most projects now. Utility classes keep the styles right next to the markup, so I'm not jumping between files or inventing class names. It works because I already know CSS: every utility maps to a real property, and when something looks off, I know what's happening underneath. I keep the config tidy and pull repeated patterns into components instead of copying long class strings around.",
   },
   {
     title: 'AI',
     image: aiImage,
-    description: '',
+    description: "I use AI tools as part of my workflow: for exploring an unfamiliar API, getting a first draft of boilerplate, or talking through a bug from a different angle. I treat the output as a suggestion from a fast but unreliable colleague. I read it, test it, and rewrite what doesn't fit. I don't ship code I can't explain. AI makes me faster, but the fundamentals are what let me tell when it's wrong.",
   }
 ]
+
+function getImage(event: MouseEvent): HTMLImageElement | null {
+  const card = event.currentTarget;
+  if (!(card instanceof HTMLElement)) return null;
+
+  const image = card.querySelector('.tech-image');
+  return image instanceof HTMLImageElement ? image : null;
+}
+
+function onEnter(event: MouseEvent) {
+  const image = getImage(event);
+  if (!image) return;
+
+  gsap.to(image, {
+    rotationY: 360,
+    filter: 'grayscale(0)',
+    transformPerspective: 600,
+    duration: 1,
+    ease: 'power2.out',
+    overwrite: 'auto',
+  });
+}
+
+function onLeave(event: MouseEvent) {
+  const image = getImage(event);
+  if (!image) return;
+
+  gsap.to(image, {
+    rotationY: 0,
+    filter: 'grayscale(1)',
+    duration: 1,
+    ease: 'power2.out',
+    overwrite: 'auto',
+  });
+}
+
+const selectedTech = ref<Techs | undefined>(techs[0]);
+
+function onClick(tech: Techs) {
+  selectedTech.value = tech;
+}
+
 </script>
 
 <template>
@@ -84,14 +124,25 @@ const techs: Techs[] = [
     </h1>
 
     <div class="techs-icons grid grid-cols-2 sm:grid-cols-4 gap-14 justify-items-center sm:max-w-200 max-w-100 mx-auto">
-      <div
-        class="w-30 h-30 border-2 border-gray-200 bg-cover bg-center bg-no-repeat"
-        v-for="tech in techs"
-        :key="tech.title"
-        :style="{ backgroundImage: `url(${ tech.image })` }"
-      >
-        <div class="-my-7 text-gray-500 text-lg text-center">{{ tech.title }}</div>
+      <div v-for="tech in techs" :key="tech.title">
+        <div class="text-gray-500 text-lg text-center">{{ tech.title }}</div>
+        <div
+          class="w-30 h-30 cursor-pointer"
+          @mouseenter="onEnter"
+          @mouseleave="onLeave"
+          @click="onClick(tech)"
+        >
+          <img
+            :src="tech.image"
+            :alt="tech.title"
+            class="tech-image size-full grayscale object-cover"
+          >
+        </div>
       </div>
+    </div>
+
+    <div class="techs-description max-w-200 text-lg text-gray-500 mt-10 sm:mt-0 p-10 sm:p-20 mx-auto">
+      {{ selectedTech?.description }}
     </div>
 
   </div>
