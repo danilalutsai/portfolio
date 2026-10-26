@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import contactBackground from '@/assets/img/bg-hero-contact.png'
-import { onMounted } from 'vue';
+import contactBackground from '@/assets/img/bg-hero-contact.webp'
 import { ref, watch, nextTick } from 'vue';
 import * as z from 'zod';
 
@@ -14,8 +13,6 @@ type: string;
 autocomplete: string;
 }
 
-
-const contact = ref<HTMLElement | null>(null)
 const isSending = ref(false);
 const submitMessage = ref('');
 

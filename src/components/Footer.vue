@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import heroPattern from '@/assets/img/bg-main-about.png';
 
 interface FooterLink {
   label: string;

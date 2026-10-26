@@ -4,8 +4,8 @@ import { RouterLink, useRoute } from 'vue-router'
 
 import { SocialMedia } from '@/data/socialMedia'
 import logo from '@/assets/img/dl-logo-bolder.svg'
-import githubLogo from '@/assets/img/github-logo.png'
-import telegramLogo from '@/assets/img/telegram-logo.png'
+import githubLogo from '@/assets/img/github-logo.webp'
+import telegramLogo from '@/assets/img/telegram-logo.webp'
 
 const links = [
   { label: 'Main', to: '/', gradient: 'from-[#f38ba8] to-[#cba6f7]' },

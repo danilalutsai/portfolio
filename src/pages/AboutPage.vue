@@ -104,7 +104,7 @@ onMounted(() => {
       </div>
 
       <div>
-        <img src="@/assets/img/avatar-01.png" alt="Danila Lutsai"
+        <img src="@/assets/img/avatar-01.webp" alt="Danila Lutsai"
           class="overflow-x-clip img-pair-1 block h-auto w-full  max-w-100 rounded-full shadow-photo">
       </div>
 
@@ -114,7 +114,7 @@ onMounted(() => {
       </div>
 
       <div class="overflow-x-clip relative">
-        <img src="@/assets/img/mountains.png" alt="Danila Lutsai"
+        <img src="@/assets/img/mountains.webp" alt="Danila Lutsai" loading="lazy"
           class="img-pair-2 block h-auto shadow-photo rounded-full w-full  max-w-100 aspect-square" />
       </div>
 
@@ -129,7 +129,7 @@ onMounted(() => {
 
       <div class="overflow-x-clip img-pair-3 sm:col-start-2 sm-row-start-3 relative">
         <img
-          src="@/assets/img/about-focused-2.png"
+          src="@/assets/img/about-focused-2.webp"
           alt="Mountain landscape"
           loading="lazy"
           class="block h-auto shadow-photo rounded-full w-full  max-w-100 aspect-square"
@@ -147,7 +147,7 @@ onMounted(() => {
 
       <div class="overflow-x-clip img-pair-4 mb-10 sm:col-start-1 sm:row-start-4 relative">
         <img
-          src="@/assets/img/main-02.png"
+          src="@/assets/img/main-02.webp"
           alt="Mountain and me"
           loading="lazy"
           class="shadow-photo rounded-full w-full max-w-100 aspect-square"

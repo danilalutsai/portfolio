@@ -6,13 +6,12 @@ import { onMounted, onUnmounted, ref } from 'vue';
 import { RouterLink } from 'vue-router';
 
 import { SocialMedia } from '@/data/socialMedia'
-import heroPattern from '@/assets/img/bg-main-about.png';
-import mainFooter from '@/assets/img/bg-footer-main.png';
+import heroPattern from '@/assets/img/bg-main-about.webp';
+import mainFooter from '@/assets/img/bg-footer-main.webp';
 
 const hero = ref<HTMLElement | null>(null)
 const aboutSection = ref<HTMLElement | null>(null);
 const passionSection = ref<HTMLElement | null>(null);
-const footerSection = ref<HTMLElement | null>(null);
 let motion: ReturnType<typeof gsap.matchMedia> | undefined;
 
 function animateHero() {
@@ -145,8 +144,6 @@ function animatePassion(section: HTMLElement) {
     )
 }
 
-const word: string = 'aa';
-
 function scrollToAbout() {
   if (!aboutSection.value) return;
   gsap.to(window, {
@@ -179,47 +176,6 @@ function scrollToBottom() {
   });
 }
 
-function animateFooter() {
-  gsap
-    .timeline()
-    .from(
-      '[data-animate="hero-bg"]',
-      {
-        opacity: 0,
-        duration: 1,
-      }
-    )
-    .from(
-      '[data-animate="hero-line"]',
-      {
-        opacity: 0,
-        y: 20,
-        duration: 0.5,
-        stagger: 0.12,
-      },
-      0.2
-    )
-    .from(
-      '[data-animate="hero-summary"]',
-      {
-        opacity: 0,
-        y: 16,
-        duration: 0.5,
-      },
-      0.5
-    )
-
-    // Animate the wrapper so each button's transform stays available for CSS hover.
-    .from(
-      '[data-animate="hero-actions"]',
-      {
-        opacity: 0,
-        y: 16,
-        duration: 0.5,
-      },
-      0.6
-    )
-}
 
 function animateHeroBackground(section: HTMLElement) {
   const background = section.querySelector<HTMLElement>(
@@ -291,8 +247,6 @@ onMounted(() => {
       animatePassionBackground(passion)
     }, passion)
   }
-
-  const footer = footerSection.value
 })
 
 onUnmounted(() => {
@@ -492,7 +446,7 @@ onUnmounted(() => {
       </div>
       <img
         data-animate="about-photo"
-        src="@/assets/img/avatar.jpg"
+        src="@/assets/img/avatar.webp"
         alt="Danila Lutsai"
         class="m-5 aspect-square w-full max-w-60 shrink-0 self-center rounded-full object-cover"
       />
@@ -536,6 +490,7 @@ onUnmounted(() => {
     <img
       data-animate="passion-bg"
       :src="mainFooter"
+      loading="lazy"
       alt=""
       class="absolute inset-0 left-0 w-full h-full object-cover"
     />
@@ -547,7 +502,8 @@ onUnmounted(() => {
     >
       <img
         data-animate="passion-photo"
-        src="@/assets/img/avatar-01.png"
+        src="@/assets/img/avatar-01.webp"
+        loading="lazy"
         alt="Danila Lutsai"
         class="order-2 mx-auto aspect-square w-full max-w-80 shrink-0 self-center
         object-cover lg:order-1 rounded-xl"

@@ -1,7 +1,7 @@
-import linkedInLogo from '@/assets/img/linkedin-logo.png';
-import githubLogo from '@/assets/img/github-logo.png';
-import mailLogo from '@/assets/img/mail-logo.png';
-import telegramLogo from '@/assets/img/telegram-logo.png';
+import linkedInLogo from '@/assets/img/linkedin-logo.webp';
+import githubLogo from '@/assets/img/github-logo.webp';
+import mailLogo from '@/assets/img/mail-logo.webp';
+import telegramLogo from '@/assets/img/telegram-logo.webp';
 
 export const SocialMedia = [
   { name: 'mail', url: '/contact', alt: 'Mail', image: mailLogo },

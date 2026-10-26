@@ -3,14 +3,14 @@ import { gsap } from 'gsap';
 import { onMounted, ref } from 'vue';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 
-import fundamentalsImage from '@/assets/img/TechsComputerScience.jpg';
-import cssImage from '@/assets/img/TechsCSS.jpg';
-import htmlImage from '@/assets/img/TechsHTML.jpg';
-import javascriptImage from '@/assets/img/TechsJS.jpg';
-import typescriptImage from '@/assets/img/TechsTS.jpg';
-import vueImage from '@/assets/img/TechsVueJS.jpg';
-import tailwindImage from '@/assets/img/TechsTailwindCSS.png';
-import aiImage from '@/assets/img/TechsAI.png';
+import fundamentalsImage from '@/assets/img/TechsComputerScience.webp';
+import cssImage from '@/assets/img/TechsCSS.webp';
+import htmlImage from '@/assets/img/TechsHTML.webp';
+import javascriptImage from '@/assets/img/TechsJS.webp';
+import typescriptImage from '@/assets/img/TechsTS.webp';
+import vueImage from '@/assets/img/TechsVueJS.webp';
+import tailwindImage from '@/assets/img/TechsTailwindCSS.webp';
+import aiImage from '@/assets/img/TechsAI.webp';
 
 const techsDescription = ref<HTMLElement | null>(null);
 
