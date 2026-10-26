@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import gsap from 'gsap';
+import { gsap } from 'gsap';
 import { onMounted, ref } from 'vue';
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 
 import fundamentalsImage from '@/assets/img/TechsComputerScience.jpg';
 import cssImage from '@/assets/img/TechsCSS.jpg';
@@ -10,6 +11,10 @@ import typescriptImage from '@/assets/img/TechsTS.jpg';
 import vueImage from '@/assets/img/TechsVueJS.jpg';
 import tailwindImage from '@/assets/img/TechsTailwindCSS.png';
 import aiImage from '@/assets/img/TechsAI.png';
+
+const techsDescription = ref<HTMLElement | null>(null);
+
+gsap.registerPlugin(ScrollToPlugin);
 
 onMounted(() => {
   gsap.from('.techs-title', {
@@ -109,8 +114,45 @@ function onLeave(event: MouseEvent) {
 
 const selectedTech = ref<Techs | undefined>(techs[0]);
 
-function onClick(tech: Techs) {
+function onClick(tech: Techs, event: MouseEvent) {
   selectedTech.value = tech;
+  scrollToDescription();
+
+  const image = getImage(event);
+  if (!image) return;
+
+  gsap.fromTo(
+    image,
+    { rotationY: 0 },
+    {
+      rotationY: 360,
+      filter: 'grayscale(0)',
+      duration: 1,
+      ease: 'power2.out',
+      overwrite: 'auto',
+    },
+  );
+}
+
+function scrollToDescription() {
+  if (!techsDescription.value) return;
+  if (!window.matchMedia('(max-width: 639px)').matches) return;
+
+  gsap.to(window, {
+
+    duration: window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches ? 0 : 1,
+
+    delay: 0.5,
+    ease: 'power2.inOut',
+    scrollTo: {
+      y: techsDescription.value,
+      offsetY: 80,
+      autoKill: true,
+    },
+    overwrite: 'auto',
+  });
 }
 
 </script>
@@ -130,7 +172,7 @@ function onClick(tech: Techs) {
           class="w-30 h-30 cursor-pointer"
           @mouseenter="onEnter"
           @mouseleave="onLeave"
-          @click="onClick(tech)"
+          @click="onClick(tech, $event)"
         >
           <img
             :src="tech.image"
@@ -141,7 +183,7 @@ function onClick(tech: Techs) {
       </div>
     </div>
 
-    <div class="techs-description max-w-200 text-lg text-gray-500 mt-10 sm:mt-0 p-10 sm:p-20 mx-auto">
+    <div ref="techsDescription" class="techsDescription max-w-200 text-lg text-gray-500 mt-10 sm:mt-0 p-10 sm:p-20 mx-auto">
       <Transition
         mode="out-in"
         enter-active-class="transition-opacity duration-300"

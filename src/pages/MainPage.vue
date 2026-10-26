@@ -151,7 +151,7 @@ function scrollToAbout() {
   if (!aboutSection.value) return;
   gsap.to(window, {
     duration: window.matchMedia(
-      '(prefersmreduced-motion: reduce)'
+      '(prefersreduced-motion: reduce)'
     ).matches ? 0 : 1,
     ease: 'power2.inOut',
     scrollTo: {
@@ -160,7 +160,7 @@ function scrollToAbout() {
       autoKill: true,
     },
     overwrite: 'auto',
-  })
+  });
 }
 
 function scrollToBottom() {
@@ -176,7 +176,7 @@ function scrollToBottom() {
       autoKill: true,
     },
     overwrite: 'auto',
-  })
+  });
 }
 
 function animateFooter() {
