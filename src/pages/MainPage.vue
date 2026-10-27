@@ -369,13 +369,11 @@ onUnmounted(() => {
 
           </RouterLink>
         </div>
-        <div>
-        </div>
       </div>
       <button
         type="button"
         aria-label="Scroll to About"
-        class="group absolute bottom-6 left-1/2 flex size-12 -translate-x-1/2
+        class="pb-30 group absolute bottom-6 left-1/2 flex size-12 -translate-x-1/2
         cursor-pointer items-center justify-center text-white"
         @click="scrollToAbout"
       >
