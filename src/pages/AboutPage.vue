@@ -45,7 +45,7 @@ onMounted(() => {
   gsap.from(".text-pair-3", {
     scrollTrigger: {
       trigger: ".text-pair-3",
-      start: "top 100%",
+      start: "top 75%",
     },
     opacity: 0,
     x: -200,
@@ -54,7 +54,7 @@ onMounted(() => {
   gsap.from(".img-pair-3", {
     scrollTrigger: {
       trigger: ".img-pair-3",
-      start: "top 100%",
+      start: "top 75%",
     },
     opacity: 0,
     x: 200,
@@ -69,7 +69,7 @@ onMounted(() => {
     x: 200,
     scrollTrigger: {
       trigger: ".text-pair-4",
-      start: "top 100%",
+      start: "top 75%",
     },
   });
   gsap.from(".img-pair-4", {
@@ -78,7 +78,7 @@ onMounted(() => {
     x: -200,
     scrollTrigger: {
       trigger: ".img-pair-4",
-      start: "top 100%",
+      start: "top 75%",
     },
   });
 });
