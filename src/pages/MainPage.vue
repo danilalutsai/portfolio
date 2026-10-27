@@ -215,7 +215,7 @@ function animatePassionBackground(section: HTMLElement) {
     '[data-animate="passion-bg"]',
   )
 
-  if (!background) return
+  if (!background) return;
 
   gsap.fromTo(background, {
     y: () => -section.offsetHeight * 0.175,
@@ -233,11 +233,11 @@ function animatePassionBackground(section: HTMLElement) {
 }
 
 onMounted(() => {
-  gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
-  motion = gsap.matchMedia()
-  const reducedMotionQuery = '(prefers-reduced-motion: no-preference)'
+  gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+  motion = gsap.matchMedia();
+  const reducedMotionQuery = '(prefers-reduced-motion: no-preference)';
 
-  const heroElement = hero.value
+  const heroElement = hero.value;
 
   if (heroElement) {
     motion.add(
@@ -375,7 +375,7 @@ onUnmounted(() => {
       <button
         type="button"
         aria-label="Scroll to About"
-        class="mb-60 sm:mb-40 group absolute bottom-6 left-1/2 flex size-12 -translate-x-1/2
+        class="mb-30 sm:mb-40 group absolute bottom-6 left-1/2 flex size-12 -translate-x-1/2
         cursor-pointer items-center justify-center text-white"
         @click="scrollToAbout"
       >
