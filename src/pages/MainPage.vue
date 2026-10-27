@@ -169,7 +169,7 @@ function scrollToBottom() {
     ease: 'power2.inOut',
     scrollTo: {
       y: '.passion-content',
-      offsetY:50,
+      offsetY: 20,
       autoKill: false,
     },
     overwrite: 'auto',
@@ -375,7 +375,7 @@ onUnmounted(() => {
       <button
         type="button"
         aria-label="Scroll to About"
-        class="mb-30 sm:mb-40 group absolute bottom-6 left-1/2 flex size-12 -translate-x-1/2
+        class="mb-60 sm:mb-40 group absolute bottom-6 left-1/2 flex size-12 -translate-x-1/2
         cursor-pointer items-center justify-center text-white"
         @click="scrollToAbout"
       >
