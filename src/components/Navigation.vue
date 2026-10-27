@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 
 import { SocialMedia } from '@/data/socialMedia'
@@ -19,15 +19,16 @@ const socialMediaNav = [
   { url: 'https://t.me/danilalutsai', alt: 'Telegram', image: telegramLogo },
 ]
 
-const isOpen = ref(false)
-const route = useRoute()
+const isOpen = ref(false);
+const isHidden = ref(false);
+const route = useRoute();
 const currentGradient = computed(
   () => {
     return links.find((link) => {
       return link.to === route.path
     })?.gradient ?? 'from-[#cba6f7] to-[#f38ba8]'
   },
-)
+);
 
 watch(
   () => route.fullPath,
