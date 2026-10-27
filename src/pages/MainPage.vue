@@ -153,8 +153,8 @@ function scrollToAbout() {
     ease: 'power2.inOut',
     scrollTo: {
       y: aboutSection.value,
-      offsetY: 80,
-      autoKill: true,
+      offsetY: 0,
+      autoKill: false,
     },
     overwrite: 'auto',
   });
@@ -168,11 +168,24 @@ function scrollToBottom() {
     ).matches ? 0 : 1,
     ease: 'power2.inOut',
     scrollTo: {
-      y: passionSection.value,
-      offsetY:0,
-      autoKill: true,
+      y: '.passion-content',
+      offsetY:50,
+      autoKill: false,
     },
     overwrite: 'auto',
+  });
+}
+
+function scrollToTop() {
+  if (!hero.value) return;
+  gsap.to(window, {
+    duration: 1,
+    ease: 'power2.inOut',
+    scrollTo: {
+      y: 0,
+      offsetY: 0,
+      autoKill: false,
+    },
   });
 }
 
@@ -494,7 +507,7 @@ onUnmounted(() => {
       />
       <div
         data-animate="passion-content"
-        class=" relative flex h-full max-w-276 flex-col gap-8
+        class="passion-content relative flex h-full max-w-276 flex-col gap-8
         transition-transform duration-300 ease-standard lg:flex-row
         lg:justify-between p-10 my-10 rounded-xl bg-white"
       >
@@ -532,6 +545,34 @@ onUnmounted(() => {
           </p>
         </div>
       </div>
+      <button
+        type="button"
+        aria-label="Scroll to Top"
+        class="group absolute bottom-30 left-1/2 flex size-12 -translate-x-1/2
+        cursor-pointer items-center justify-center text-white pb-10 mx-auto"
+        @click="scrollToTop"
+      >
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="3"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="size-10 transition-transform duration-300 group-hover:-translate-y-2
+          motion-reduce:transition-none"
+        >
+          <path
+            d="M12 8v12"
+            class="origin-top transform-fill scale-y-0 opacity-0
+            transition-[scale,opacity] duration-300
+            group-hover:scale-y-100 group-hover:opacity-100
+            motion-reduce:transition-none"
+          />
+          <path d="m5 15 7-7 7 7" />
+        </svg>
+      </button>
     </section>
   </div>
 </template>
