@@ -299,7 +299,7 @@ onUnmounted(() => {
             <span
               data-animate="hero-line"
               class="block"
-            >re<span class="text-green-500">b</span>uild</span
+            >reb<span class="text-green-500"></span>uild</span
             >
           </h1>
         </div>

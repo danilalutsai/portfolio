@@ -10,7 +10,7 @@ import javascriptImage from '@/assets/img/TechsJS.webp';
 import typescriptImage from '@/assets/img/TechsTS.webp';
 import vueImage from '@/assets/img/TechsVueJS.webp';
 import tailwindImage from '@/assets/img/TechsTailwindCSS.webp';
-import aiImage from '@/assets/img/TechsAI.webp';
+import aiImage from '@/assets/img/TechsAI.webp'b;
 
 const techsDescription = ref<HTMLElement | null>(null);
 
@@ -152,6 +152,7 @@ function scrollToDescription() {
       autoKill: true,
     },
     overwrite: 'auto',
+    autoKill: false,
   });
 }
 
