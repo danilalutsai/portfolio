@@ -282,25 +282,16 @@ onUnmounted(() => {
           class="flex flex-row items-center justify-center gap-16 sm:flex-row sm:gap-20"
         >
           <h1
-            class="text-right font-mono text-5xl leading-none font-semibold text-white sm:text-6xl"
+            class="grid grid-cols-[auto_auto] justify-center text-4xl font-semibold uppercase sm:text-6xl leading-tight text-white"
           >
-            <span
-              data-animate="hero-line"
-              class="block"
-            ><span
-                class="text-green-500"
-              >b</span>uild</span
-            >
-            <span
-              data-animate="hero-line"
-              class="block"
-            ><span class="text-green-500">b</span>reak</span
-            >
-            <span
-              data-animate="hero-line"
-              class="block"
-            >reb<span class="text-green-500"></span>uild</span
-            >
+            <span class="text-right text-green-500">B</span>
+            <span>uild</span>
+
+            <span class="text-right">de<span class="text-green-500">b</span></span>
+            <span>ug</span>
+
+            <span class="text-right text-green-500">B</span>
+            <span>oost</span>
           </h1>
         </div>
 
