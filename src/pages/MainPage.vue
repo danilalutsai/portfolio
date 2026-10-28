@@ -324,7 +324,7 @@ onUnmounted(() => {
 
 <template>
   <div>
-    <section ref="hero" class="pb-20 relative flex flex-col w-full overflow-hidden min-h-svh">
+    <section ref="hero" class="pt-20 pb-40 relative flex flex-col w-full overflow-hidden min-h-svh">
       <img
         data-animate="hero-bg"
         :src="heroPattern"
@@ -426,7 +426,7 @@ onUnmounted(() => {
       <button
         type="button"
         aria-label="Scroll to About"
-        class="group relative bottom-20 left-1/2 flex size-12 -translate-x-1/2
+        class="group relative bottom-10 left-1/2 flex size-12 -translate-x-1/2
         cursor-pointer items-center justify-center text-white"
         @click="scrollToAbout"
       >
