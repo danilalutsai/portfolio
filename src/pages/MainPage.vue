@@ -2,12 +2,17 @@
 import { gsap } from 'gsap';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { SplitText } from 'gsap/SplitText';
+
 import { onMounted, onUnmounted, ref } from 'vue';
 import { RouterLink } from 'vue-router';
 
 import { SocialMedia } from '@/data/socialMedia'
 import heroPattern from '@/assets/img/bg-main-about.webp';
 import mainFooter from '@/assets/img/bg-footer-main.webp';
+
+const slogan = ref<HTMLElement | null>(null);
+const caret = ref<HTMLElement | null>(null);
 
 const hero = ref<HTMLElement | null>(null)
 const aboutSection = ref<HTMLElement | null>(null);
@@ -232,12 +237,59 @@ function animatePassionBackground(section: HTMLElement) {
     })
 }
 
+function animateTyping(heading: HTMLElement, cursor: HTMLElement) {
+  const split = SplitText.create(heading, { type: 'chars' });
+  const [firstChar] = split.chars;
+  if (!firstChar) return;
+
+  // Place the cursor at the left or right edge of a character.
+  function moveCursorTo(char: Element, edge: 'left' | 'right') {
+    const headingBox = heading.getBoundingClientRect();
+    const charBox = char.getBoundingClientRect();
+
+    gsap.set(cursor, {
+      x: charBox[edge] - headingBox.left,
+      y: charBox.top - headingBox.top,
+      height: charBox.height,
+    });
+  }
+
+  const blink = gsap.to(cursor, {
+    autoAlpha: 0,
+    duration: 0.5,
+    ease: 'steps(1)',
+    repeat: -1,
+    yoyo: true,
+    paused: true,
+  });
+
+  gsap.set(split.chars, { autoAlpha: 0 });
+  moveCursorTo(firstChar, 'left');
+
+  const typing = gsap.timeline({
+    delay: 0.4,
+    onComplete: () => {
+      blink.play();
+    },
+  });
+
+  typing.set(cursor, { autoAlpha: 1 });
+
+  for (const char of split.chars) {
+    typing
+      .set(char, { autoAlpha: 1 }, '+=0.09')
+      .call(moveCursorTo, [char, 'right'], '<');
+  }
+}
+
 onMounted(() => {
-  gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+  gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, SplitText);
   motion = gsap.matchMedia();
   const reducedMotionQuery = '(prefers-reduced-motion: no-preference)';
 
   const heroElement = hero.value;
+  const heading = slogan.value;
+  const cursor = caret.value;
 
   if (heroElement) {
     motion.add(
@@ -245,6 +297,7 @@ onMounted(() => {
       () => {
         animateHero()
         animateHeroBackground(heroElement)
+        if (heading && cursor) animateTyping(heading, cursor)
       },
       heroElement,
     )
@@ -265,6 +318,8 @@ onMounted(() => {
 onUnmounted(() => {
   motion?.revert()
 })
+
+
 </script>
 
 <template>
@@ -279,10 +334,11 @@ onUnmounted(() => {
 
       <div class="relative mx-auto w-full max-w-3xl px-6 sm:px-10">
         <div
-          class="flex flex-row items-center justify-center gap-16 sm:flex-row sm:gap-20"
+          class="container flex flex-row items-center justify-center gap-16 sm:flex-row sm:gap-20"
         >
           <h1
-            class="grid grid-cols-[auto_auto] justify-center text-4xl font-semibold uppercase sm:text-6xl leading-tight text-white"
+            ref="slogan"
+            class="relative grid grid-cols-[auto_auto] justify-center text-4xl font-semibold uppercase sm:text-6xl leading-tight text-white"
           >
             <span class="text-right text-green-500">B</span>
             <span>uild</span>
@@ -292,6 +348,12 @@ onUnmounted(() => {
 
             <span class="text-right text-green-500">B</span>
             <span>oost</span>
+
+            <span
+              ref="caret"
+              aria-hidden="true"
+              class="invisible absolute top-0 left-0 w-1 bg-green-500"
+            ></span>
           </h1>
         </div>
 
@@ -565,3 +627,4 @@ onUnmounted(() => {
     </section>
   </div>
 </template>
+
