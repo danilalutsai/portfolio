@@ -158,7 +158,7 @@ function scrollToAbout() {
     ease: 'power2.inOut',
     scrollTo: {
       y: aboutSection.value,
-      offsetY: -20,
+      offsetY: -30,
       autoKill: false,
     },
     overwrite: 'auto',
