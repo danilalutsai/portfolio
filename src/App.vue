@@ -18,7 +18,10 @@ function leave(el: Element, done: () => void) {
     {
       opacity: 0,
       duration: 0.3,
-      onComplete: done,
+      onComplete: () => {
+        window.scrollTo(0, 0);
+        done();
+      },
     });
 }
 

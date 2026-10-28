@@ -324,7 +324,7 @@ onUnmounted(() => {
 
 <template>
   <div>
-    <section ref="hero" class="relative flex w-full items-center pb-30 overflow-hidden min-h-svh">
+    <section ref="hero" class="pb-20 relative flex flex-col w-full overflow-hidden min-h-svh">
       <img
         data-animate="hero-bg"
         :src="heroPattern"
@@ -332,13 +332,13 @@ onUnmounted(() => {
         class="absolute inset-0 h-full w-full object-cover"
       />
 
-      <div class="relative mx-auto w-full max-w-3xl px-6 sm:px-10">
+      <div class="relative mx-auto my-auto w-full max-w-3xl px-6 sm:px-10 pb-20">
         <div
           class="container flex flex-row items-center justify-center gap-16 sm:flex-row sm:gap-20"
         >
           <h1
             ref="slogan"
-            class="relative grid grid-cols-[auto_auto] justify-center text-4xl font-semibold uppercase sm:text-6xl leading-tight text-white"
+            class="relative grid grid-cols-[auto_auto] justify-center text-6xl font-semibold uppercase leading-tight text-white"
           >
             <span class="text-right text-green-500">B</span>
             <span>uild</span>
@@ -352,7 +352,7 @@ onUnmounted(() => {
             <span
               ref="caret"
               aria-hidden="true"
-              class="invisible absolute top-0 left-0 w-1 bg-green-500"
+              class="invisible absolute top-0 left-0 w-2 bg-green-500"
             ></span>
           </h1>
         </div>
@@ -426,7 +426,7 @@ onUnmounted(() => {
       <button
         type="button"
         aria-label="Scroll to About"
-        class="pb-30 group absolute bottom-6 left-1/2 flex size-12 -translate-x-1/2
+        class="group relative bottom-20 left-1/2 flex size-12 -translate-x-1/2
         cursor-pointer items-center justify-center text-white"
         @click="scrollToAbout"
       >
