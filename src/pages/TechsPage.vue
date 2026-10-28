@@ -91,7 +91,6 @@ function onEnter(event: MouseEvent) {
 
   gsap.to(image, {
     rotationY: 360,
-    filter: 'grayscale(0)',
     transformPerspective: 600,
     duration: 1,
     ease: 'power2.out',
@@ -105,7 +104,6 @@ function onLeave(event: MouseEvent) {
 
   gsap.to(image, {
     rotationY: 0,
-    filter: 'grayscale(1)',
     duration: 1,
     ease: 'power2.out',
     overwrite: 'auto',
@@ -126,7 +124,6 @@ function onClick(tech: Techs, event: MouseEvent) {
     { rotationY: 0 },
     {
       rotationY: 360,
-      filter: 'grayscale(0)',
       duration: 1,
       ease: 'power2.out',
       overwrite: 'auto',
@@ -149,7 +146,7 @@ function scrollToDescription() {
     scrollTo: {
       y: techsDescription.value,
       offsetY: 80,
-      autoKill: true,
+      autoKill: false,
     },
     overwrite: 'auto',
     autoKill: false,
@@ -178,7 +175,7 @@ function scrollToDescription() {
           <img
             :src="tech.image"
             :alt="tech.title"
-            class="tech-image size-full grayscale object-cover"
+            class="tech-image size-full object-cover"
           >
         </div>
       </div>
