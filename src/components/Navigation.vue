@@ -42,14 +42,17 @@ let lastScrollY = 0;
 function onScroll() {
   if (isOpen.value) return;
 
-  const currentY = window.scrollY;
+  const currentY = Math.max(window.scrollY, 0);
 
   if (currentY < 80) {
     isHidden.value = false;
-  } else if (Math.abs(currentY - lastScrollY) > 10) {
-    isHidden.value = currentY > lastScrollY;
+    lastScrollY = currentY;
+    return;
   }
 
+  if (Math.abs(currentY - lastScrollY) < 10) return;
+
+  isHidden.value = currentY > lastScrollY;
   lastScrollY = currentY;
 }
 
