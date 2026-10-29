@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import { onMounted, ref } from 'vue';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 
+// Images import
 import fundamentalsImage from '@/assets/img/TechsComputerScience.webp';
 import cssImage from '@/assets/img/TechsCSS.webp';
 import htmlImage from '@/assets/img/TechsHTML.webp';
@@ -121,7 +122,9 @@ function onClick(tech: Techs, event: MouseEvent) {
 
   gsap.fromTo(
     image,
-    { rotationY: 0 },
+    {
+      rotationY: 0,
+    },
     {
       rotationY: 360,
       duration: 1,
@@ -175,7 +178,8 @@ function scrollToDescription() {
           <img
             :src="tech.image"
             :alt="tech.title"
-            class="tech-image size-full object-cover"
+            class="tech-image size-full object-cover transition-[filter] duration-500"
+            :class="{ grayscale: selectedTech?.title === tech.title }"
           >
         </div>
       </div>
