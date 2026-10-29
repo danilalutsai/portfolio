@@ -3,7 +3,7 @@ import { gsap } from 'gsap';
 import { onMounted, ref } from 'vue';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 
-// Images import
+// Images imports
 import fundamentalsImage from '@/assets/img/TechsComputerScience.webp';
 import cssImage from '@/assets/img/TechsCSS.webp';
 import htmlImage from '@/assets/img/TechsHTML.webp';
@@ -152,7 +152,18 @@ function scrollToDescription() {
       autoKill: false,
     },
     overwrite: 'auto',
-    autoKill: false,
+  });
+}
+
+function scrollToTop() {
+  gsap.to(window, {
+    duration: 1,
+    ease: 'power2.inOut',
+    scrollTo: {
+      y: 0,
+      offsetY: 0,
+      autoKill: false,
+    },
   });
 }
 
@@ -198,6 +209,36 @@ function scrollToDescription() {
         </p>
       </Transition>
     </div>
+
+
+      <button
+        type="button"
+        aria-label="Scroll to Top"
+        class="group absolute left-1/2 flex size-12 -translate-x-1/2
+        cursor-pointer items-center justify-center text-gray-500 pb-10 mx-auto"
+        @click="scrollToTop"
+      >
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="3"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="size-10 transition-transform duration-300 group-hover:-translate-y-2
+          motion-reduce:transition-none"
+        >
+          <path
+            d="M12 8v12"
+            class="origin-top transform-fill scale-y-0 opacity-0
+            transition-[scale,opacity] duration-300
+            group-hover:scale-y-100 group-hover:opacity-100
+            motion-reduce:transition-none"
+          />
+          <path d="m5 15 7-7 7 7" />
+        </svg>
+      </button>
 
   </div>
 
