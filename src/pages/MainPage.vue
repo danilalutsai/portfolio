@@ -27,16 +27,6 @@ function animateHero() {
       { opacity: 0, duration: 1 }
     )
     .from(
-      '[data-animate="hero-line"]',
-      {
-        opacity: 0,
-        y: 20,
-        duration: 1,
-        stagger: 0.12,
-      },
-      0.2
-    )
-    .from(
       '[data-animate="hero-summary"]',
       {
         opacity: 0,
