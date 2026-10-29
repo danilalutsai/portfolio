@@ -1,10 +1,8 @@
 <script setup lang="ts">
 
-interface FooterLink {
-  label: string;
-  href: string;
-  target?: string;
-}
+type FooterLink =
+  | { kind: 'internal'; label: string; to: string }
+  | { kind: 'external'; label: string; href: string };
 
 interface FooterColumn {
   title: string;
@@ -15,21 +13,25 @@ const columns: FooterColumn[] = [
   { title: "Explore",
     links: [
       {
+        kind: 'internal',
         label: "Home",
-        href: "/",
+        to: "/",
       },
       {
+        kind: 'internal',
         label: "Techs",
-        href: "/techs",
+        to: "/techs",
 
       },
       {
+        kind: 'internal',
         label: "About",
-        href: "/about",
+        to: "/about",
       },
       {
+        kind: 'internal',
         label: "Contact",
-        href: "/contact",
+        to: "/contact",
       },
     ],
   },
@@ -37,15 +39,17 @@ const columns: FooterColumn[] = [
     title: "Social",
     links: [
       {
+        kind: 'external',
         label: "GitHub",
         href: "https://github.com/danilalutsai",
-        target: "_blank",
       },
       {
+        kind: 'external',
         label: "LinkedIn",
         href: "https://www.linkedin.com/in/danila-lutsai-4a1b8b174/",
       },
       {
+        kind: 'external',
         label: "LeetCode",
         href: "https://leetcode.com/u/danilalutsai/",
       },
@@ -55,18 +59,22 @@ const columns: FooterColumn[] = [
     title: "Dependencies",
     links: [
       {
+        kind: 'external',
         label: "Vue",
         href: "https://developer.mozilla.org/en-US/",
       },
       {
+        kind: 'external',
         label: "Zod",
         href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
       },
       {
+        kind: 'external',
         label: "GSAP",
         href: "https://www.typescriptlang.org/",
       },
       {
+        kind: 'external',
         label: "Tailwind",
         href: "https://tailwindcss.com/",
       },
@@ -76,18 +84,22 @@ const columns: FooterColumn[] = [
     title: "Learning Journay",
     links: [
       {
+        kind: 'external',
         label: "HTML/CSS",
         href: "https://developer.mozilla.org/en-US/",
       },
       {
+        kind: 'external',
         label: "JavaScript",
         href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
       },
       {
+        kind: 'external',
         label: "TypeScript",
         href: "https://www.typescriptlang.org/",
       },
       {
+        kind: 'external',
         label: "Vue",
         href: "https://vuejs.org/",
       },
@@ -117,11 +129,23 @@ const columns: FooterColumn[] = [
         <ul class="space-y-2">
           <li
             v-for="link in column.links"
-            :key="link.href"
-          ><a
+            :key="link.label"
+          >
+            <RouterLink
+              v-if="link.kind === 'internal'"
+              :to="link.to"
+              class="opacity-60 text-white hover:opacity-90"
+            >
+              {{ link.label }}
+            </RouterLink>
+            <a
+              v-if="link.kind === 'external'"
+              target="_blank"
+              rel="noopener noreferrer"
               :href="link.href"
-              class="opacity-60 text-white hover:opacity-90 text-md"
-            >{{ link.label }}</a></li>
+              class="opacity-60 text-white hover:opacity-90"
+            >{{ link.label }}</a>
+          </li>
         </ul>
       </div>
     </nav>
