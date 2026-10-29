@@ -1,5 +1,10 @@
 @import 'tailwindcss';
 
+::selection {
+  background-color: #79d99e;
+  color: #fff;
+}
+
 @theme {
   --font-sans: 'Avenir Next Medium', 'SF Pro Display', 'Cascadia Mono', sans-serif;
   --font-mono: 'Cascadia Mono', ui-monospace, monospace;
