@@ -184,7 +184,6 @@ function scrollToTop() {
   });
 }
 
-
 function animateHeroBackground(section: HTMLElement) {
   const background = section.querySelector<HTMLElement>(
     '[data-animate="hero-bg"]',
