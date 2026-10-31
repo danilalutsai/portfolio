@@ -14,9 +14,9 @@ const links = [
   { label: 'Contact', to: '/contact', gradient: 'from-[#cba6f7] to-[#fab387]' },
 ]
 
-const socialMediaNav = [
-  { url: 'https://github.com/danilalutsai', alt: 'Github', image: githubLogo },
-  { url: 'https://t.me/danilalutsai', alt: 'Telegram', image: telegramLogo },
+const mocialMediaNav = [
+  { label: 'GitHub', href: 'https://github.com/danilalutsai', alt: 'Github', image: githubLogo, target: '_blank' },
+  { label: 'Telegram', href: 'https://t.me/danilalutsai', alt: 'Telegram', image: telegramLogo, target: '_blank' },
 ]
 
 const isOpen = ref(false);
