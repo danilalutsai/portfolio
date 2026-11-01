@@ -14,7 +14,7 @@ const links = [
   { label: 'Contact', to: '/contact', gradient: 'from-[#cba6f7] to-[#fab387]' },
 ]
 
-const mocialMediaNav = [
+const socialMediaNav = [
   { label: 'GitHub', href: 'https://github.com/danilalutsai', alt: 'Github', image: githubLogo, target: '_blank' },
   { label: 'Telegram', href: 'https://t.me/danilalutsai', alt: 'Telegram', image: telegramLogo, target: '_blank' },
 ]
@@ -96,9 +96,9 @@ onUnmounted(() => {
               </li>
             </ul>
             <ul class="ml-5 flex items-center gap-3">
-              <li v-for="media in socialMediaNav" :key="media.url" class="inline-flex">
+              <li v-for="media in socialMediaNav" :key="media.href" class="inline-flex">
                 <a
-                  :href="media.url"
+                  :href="media.href"
                   :aria-label="media.alt"
                   target="_blank"
                   rel="noopener noreferrer"
