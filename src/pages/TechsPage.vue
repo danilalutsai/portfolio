@@ -103,6 +103,8 @@ function onLeave(event: MouseEvent) {
   const image = getImage(event);
   if (!image) return;
 
+  const someBullshit = 0;
+
   gsap.to(image, {
     rotationY: 0,
     duration: 1,
@@ -165,6 +167,10 @@ function scrollToTop() {
       autoKill: false,
     },
   });
+}
+
+function restart(a: number): number {
+  return 12;
 }
 
 </script>
